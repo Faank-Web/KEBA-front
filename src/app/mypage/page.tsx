@@ -27,12 +27,28 @@ const STATUS_HELP = [
   { title: "투자 체결", desc: "투자 신청에 성공하여 투자 체결 수량은 신청한 C 수량과 차이가 발생할 수 있습니다." },
 ];
 
+const ACCOUNT_LIST = [
+  { bank: "신한투자증권", key: "shinhan" },
+  { bank: "NH농협은행", key: "nh" },
+];
+const ACCOUNT_PRODUCTS: Record<string, Array<{ name: string; amount: number; rate: number }>> = {
+  shinhan: [
+    { name: "상품A", amount: 20000, rate: 3 },
+    { name: "상품B", amount: 50000, rate: -3 },
+  ],
+  nh: [
+    { name: "상품C", amount: 10000, rate: 2 },
+    { name: "상품D", amount: 30000, rate: 0 },
+  ],
+};
+
 export default function MyPage() {
   const [selected, setSelected] = useState("main");
   const [investList, setInvestList] = useState(INIT_INVEST_LIST);
   const [checked, setChecked] = useState<number[]>([]);
   const [showStatusHelp, setShowStatusHelp] = useState(false);
   const helpRef = useRef<HTMLDivElement>(null);
+  const [accountModal, setAccountModal] = useState<null | string>(null);
 
   const handleCheck = (id: number) => {
     setChecked((prev) =>
@@ -230,11 +246,45 @@ export default function MyPage() {
           </div>
         )}
         {selected === "account" && (
-          <div style={{ width: "100%" }}>
+          <div style={{ width: "100%", position: "relative" }}>
             <div style={{ fontSize: 22, fontWeight: 700, color: "#111", marginBottom: 18 }}>내 계좌</div>
-            <div style={{ background: "#fff", borderRadius: 12, boxShadow: "0 2px 8px #e0e0e0", padding: 32, fontSize: 17, color: "#888" }}>
-              등록된 계좌가 없습니다.
+            <div style={{ background: "#fff", borderRadius: 12, boxShadow: "0 2px 8px #e0e0e0", padding: 32, fontSize: 18, color: "#222", display: "flex", flexDirection: "column", gap: 18, maxWidth: 480 }}>
+              {ACCOUNT_LIST.map((acc) => (
+                <div key={acc.key} style={{ display: "flex", alignItems: "center", gap: 12, cursor: "pointer" }} onClick={() => setAccountModal(acc.key)}>
+                  <span style={{ fontWeight: 700, fontSize: 20, color: "#4b5e2e" }}>S</span>
+                  <span style={{ fontWeight: 700, fontSize: 18 }}>{acc.bank}</span>
+                  <span style={{ flex: 1 }} />
+                  <span style={{ color: "#bbb", fontSize: 22 }}>&gt;</span>
+                </div>
+              ))}
             </div>
+            {/* 계좌 상세 모달 */}
+            {accountModal && (
+              <div style={{ position: "fixed", top: 0, left: 0, width: "100vw", height: "100vh", background: "rgba(0,0,0,0.18)", zIndex: 1000, display: "flex", alignItems: "center", justifyContent: "center" }}>
+                <div style={{ background: "#fff", borderRadius: 16, boxShadow: "0 2px 16px #bbb8", padding: "32px 36px 28px 36px", minWidth: 340, minHeight: 220, position: "relative", display: "flex", flexDirection: "column", alignItems: "center" }}>
+                  {/* 닫기 버튼 */}
+                  <button onClick={() => setAccountModal(null)} style={{ position: "absolute", top: 18, right: 18, background: "none", border: "none", fontSize: 28, color: "#bbb", cursor: "pointer" }}>&times;</button>
+                  <div style={{ fontWeight: 700, fontSize: 19, color: "#4b5e2e", marginBottom: 18, alignSelf: "flex-start" }}>
+                    {ACCOUNT_LIST.find((a) => a.key === accountModal)?.bank}
+                  </div>
+                  <div style={{ width: 320, marginBottom: 18 }}>
+                    {ACCOUNT_PRODUCTS[accountModal].map((prod, idx) => (
+                      <div key={prod.name} style={{ display: "flex", alignItems: "center", gap: 16, marginBottom: 12, background: "#f6fff0", borderRadius: 8, padding: "14px 18px" }}>
+                        <div style={{ width: 36, height: 36, background: "#ccc", borderRadius: 8, marginRight: 8 }} />
+                        <div style={{ flex: 1 }}>
+                          <div style={{ fontWeight: 700, fontSize: 16, color: "#222" }}>{prod.name}</div>
+                          <div style={{ color: "#888", fontSize: 15 }}>{prod.amount.toLocaleString()}원 투자</div>
+                        </div>
+                        <div style={{ fontWeight: 700, fontSize: 16, color: prod.rate > 0 ? "#1a6cff" : prod.rate < 0 ? "#e23c3c" : "#888" }}>
+                          {prod.rate > 0 ? `${prod.rate}% 상승` : prod.rate < 0 ? `${Math.abs(prod.rate)}% 하락` : "0%"}
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                  <button style={{ background: "#b2c7a7", color: "#fff", border: "none", borderRadius: 8, padding: "14px 0", width: 220, fontWeight: 700, fontSize: 18, marginTop: 10, cursor: "pointer" }}>출금요청</button>
+                </div>
+              </div>
+            )}
           </div>
         )}
       </main>
