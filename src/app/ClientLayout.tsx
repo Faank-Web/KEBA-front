@@ -7,10 +7,16 @@ import { usePathname } from "next/navigation";
 export default function ClientLayout({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
   const isMypage = pathname.startsWith("/mypage");
+  const isMain = pathname === "/";
+
+  // 메인페이지에서는 헤더/푸터/사이드바를 렌더링하지 않음
+  if (isMain) {
+    return <>{children}</>;
+  }
 
   return (
     <>
-      {/* 상단 네비게이션 */}
+      {/* 상단 네비게이션 (메인페이지가 아닐 때만) */}
       <header style={{ height: 80, background: "#fff", borderBottom: "1px solid #e0e0e0", display: "flex", alignItems: "center", padding: "0 40px", fontWeight: 700, fontSize: 20, color: "#6b8e23", justifyContent: "space-between" }}>
         <div style={{ display: "flex", alignItems: "center", gap: 16 }}>
           <Link href="/" style={{ display: "flex", alignItems: "center", textDecoration: "none" }}>
