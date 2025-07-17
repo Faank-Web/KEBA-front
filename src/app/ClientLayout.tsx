@@ -35,7 +35,7 @@ export default function ClientLayout({ children }: { children: React.ReactNode }
       {/* 전체 레이아웃 */}
       <div style={{ display: "flex", minHeight: "calc(100vh - 120px)" }}>
         {/* 마이페이지에서만 사이드바 노출 */}
-        {isMypage && (
+        {isMypage ? null : (
           <aside style={{ width: 180, background: "#e6f4d7", padding: "32px 0 0 0", borderRight: "1px solid #e0e0e0" }}>
             <nav style={{ display: "flex", flexDirection: "column", gap: 20, fontSize: 16, fontWeight: 500, color: "#4b5e2e", paddingLeft: 24 }}>
               <Link href="/signup">회원가입</Link>
