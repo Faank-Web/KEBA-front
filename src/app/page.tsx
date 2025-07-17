@@ -21,7 +21,7 @@ export default function HomePage() {
             <button onClick={() => scrollToSection("notice-section")} style={{ background: "none", border: "none", fontSize: 17, color: "#111", cursor: "pointer" }}>공지사항</button>
           </div>
           <div style={{ display: "flex", alignItems: "center", gap: 20 }}>
-            <button onClick={() => scrollToSection("invest-section")} style={{ background: "#6b8e23", color: "#fff", border: "none", borderRadius: 6, padding: "8px 22px", fontWeight: 700, fontSize: 16, cursor: "pointer" }}>투자하기</button>
+            <a href="/products" style={{ background: "#b2c7a7", color: "#fff", borderRadius: 6, padding: "8px 18px", fontWeight: 700, fontSize: 16, marginRight: 8, textDecoration: "none" }}>투자하기</a>
             <a href="/login" style={{ color: "#111", fontWeight: 500, fontSize: 16, marginLeft: 8, textDecoration: "none" }}>로그인</a>
             <a href="/signup" style={{ color: "#111", fontWeight: 500, fontSize: 16, marginLeft: 8, textDecoration: "none" }}>회원가입</a>
           </div>
@@ -68,14 +68,7 @@ export default function HomePage() {
           </ul>
         </section>
 
-        {/* 투자하기 섹션 */}
-        <section id="invest-section" style={{ padding: "80px 0 60px 0" }}>
-          <h2 style={{ fontSize: 28, fontWeight: 700, marginBottom: 24 }}>투자하기</h2>
-          <div style={{ background: "#f3fbe7", borderRadius: 12, padding: 32, minHeight: 120, boxShadow: "0 2px 8px #e0e0e0", display: "flex", alignItems: "center", justifyContent: "space-between" }}>
-            <div style={{ fontWeight: 600, fontSize: 20 }}>실시간 투자 상품 현황</div>
-            <a href="/products" style={{ background: "#6b8e23", color: "#fff", borderRadius: 6, padding: "10px 28px", fontWeight: 700, fontSize: 17, textDecoration: "none" }}>투자상품 전체보기</a>
-          </div>
-        </section>
+        {/* 투자하기 섹션 제거됨 */}
       </div>
 
       {/* 피그마 스타일 푸터 */}

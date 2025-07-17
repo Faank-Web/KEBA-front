@@ -1,59 +1,57 @@
 import React from "react";
+import Link from "next/link";
 
 export default function ProductsPage() {
   return (
-    <div style={{ maxWidth: 1100, margin: "0 auto", padding: "0 24px", color: "#111" }}>
-      <h2 style={{ fontSize: 24, fontWeight: 700, color: "#111", margin: "32px 0 24px 0" }}>투자 상품 목록</h2>
-      {/* 필터 영역 */}
-      <section style={{ display: "flex", gap: 16, marginBottom: 24 }}>
-        <select style={{ padding: 8, borderRadius: 6, border: "1px solid #b2c7a7", fontSize: 15, color: "#111" }}>
-          <option>전체</option>
-          <option>과일</option>
-          <option>수산물</option>
-        </select>
-        <select style={{ padding: 8, borderRadius: 6, border: "1px solid #b2c7a7", fontSize: 15, color: "#111" }}>
-          <option>정렬: 최신순</option>
-          <option>정렬: 수익률순</option>
-        </select>
-        <input type="text" placeholder="상품명 검색" style={{ flex: 1, padding: 8, borderRadius: 6, border: "1px solid #b2c7a7", fontSize: 15, color: "#111" }} />
-      </section>
-      {/* 상품 카드 리스트 */}
-      <section style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: 24, color: "#111" }}>
-        {/* 샘플 카드 */}
-        <div style={{ background: "#fff", borderRadius: 12, boxShadow: "0 2px 8px #e0e0e0", padding: 24, display: "flex", flexDirection: "column", gap: 12, color: "#111" }}>
-          <div style={{ height: 120, background: "#e6f4d7", borderRadius: 8, marginBottom: 8, display: "flex", alignItems: "center", justifyContent: "center", color: "#bbb" }}>
-            상품 이미지
-          </div>
-          <div style={{ fontWeight: 700, fontSize: 18, color: "#111" }}>완주 딸기</div>
-          <div style={{ color: "#111" }}>수익률: 7.2%</div>
-          <div style={{ color: "#111" }}>모집금액: 1,000만원</div>
-          <button style={{ background: "#6b8e23", color: "#fff", border: "none", borderRadius: 6, padding: "8px 0", fontWeight: 600, fontSize: 15, marginTop: 8 }}>투자하기</button>
+    <div style={{ maxWidth: 1100, margin: "40px auto", padding: "0 24px", color: "#111", background: "#fff", borderRadius: 16, boxShadow: "0 2px 12px #e0e0e0" }}>
+      {/* 상단 타이틀 및 네비 */}
+      {/* <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", padding: "32px 0 0 0" }}>
+        <div style={{ fontSize: 18, color: "#bdbdbd", fontWeight: 500 }}>투자시스템 - 투자상품 목록</div>
+        <div style={{ display: "flex", alignItems: "center", gap: 12 }}>
+          <button style={{ background: "#e6f4d7", color: "#4b5e2e", border: "none", borderRadius: 6, padding: "8px 18px", fontWeight: 600, fontSize: 15 }}>투자 가이드</button>
+          <button style={{ background: "#b2c7a7", color: "#fff", border: "none", borderRadius: 6, padding: "8px 18px", fontWeight: 700, fontSize: 15 }}>투자하기</button>
         </div>
-        {/* 추가 카드 샘플 */}
-        <div style={{ background: "#fff", borderRadius: 12, boxShadow: "0 2px 8px #e0e0e0", padding: 24, display: "flex", flexDirection: "column", gap: 12, color: "#111" }}>
-          <div style={{ height: 120, background: "#e6f4d7", borderRadius: 8, marginBottom: 8, display: "flex", alignItems: "center", justifyContent: "center", color: "#bbb" }}>
-            상품 이미지
+      </div> */}
+      {/* 카테고리 타이틀 */}
+      <div style={{ display: "flex", alignItems: "center", gap: 10, margin: "32px 0 16px 0", fontSize: 22, fontWeight: 700, color: "#111" }}>
+        <span style={{ color: "#6b8e23", fontSize: 28 }}>✔</span>
+        농수산물 투자 상품
+      </div>
+      {/* 상품 카드 리스트 (피그마 스타일) */}
+      <div style={{ display: "flex", gap: 24, marginBottom: 24 }}>
+        {/* 첫번째 카드 - 강조 */}
+        <Link href="/products/1" style={{ flex: 1, textDecoration: "none" }}>
+          <div style={{ background: "#e6f4d7", borderRadius: 16, boxShadow: "0 2px 8px #b2c7a7", padding: 32, display: "flex", flexDirection: "column", gap: 16, minWidth: 260, position: "relative", cursor: "pointer" }}>
+            <div style={{ position: "absolute", top: 20, left: 20, background: "#fff7e6", color: "#ff6600", borderRadius: 8, padding: "4px 12px", fontWeight: 700, fontSize: 15, display: "flex", alignItems: "center", gap: 6 }}>
+              <span style={{ fontSize: 18 }}>🔥</span> 실시간 인기 투자 상품
+            </div>
+            <div style={{ fontWeight: 700, fontSize: 22, marginTop: 36 }}>전략형 투자 상품</div>
+            <div style={{ color: "#888", fontSize: 15 }}>○○○농장</div>
+            <div style={{ display: "flex", alignItems: "center", gap: 16, margin: "12px 0" }}>
+              <div style={{ fontWeight: 600, fontSize: 16, color: "#111" }}>20,000만원+</div>
+              <div style={{ color: "#bdbdbd", fontSize: 15 }}>|</div>
+              <div style={{ color: "#6b8e23", fontWeight: 700, fontSize: 15 }}>2025.07.14</div>
+            </div>
+            <button style={{ background: "#b2c7a7", color: "#fff", border: "none", borderRadius: 6, padding: "10px 0", fontWeight: 700, fontSize: 16, marginTop: 8 }}>투자하기</button>
           </div>
-          <div style={{ fontWeight: 700, fontSize: 18, color: "#111" }}>제주 감귤</div>
-          <div style={{ color: "#111" }}>수익률: 5.8%</div>
-          <div style={{ color: "#111" }}>모집금액: 2,000만원</div>
-          <button style={{ background: "#6b8e23", color: "#fff", border: "none", borderRadius: 6, padding: "8px 0", fontWeight: 600, fontSize: 15, marginTop: 8 }}>투자하기</button>
+        </Link>
+        {/* 두번째/세번째 카드 - 마감 */}
+        <div style={{ flex: 1, background: "#ededed", borderRadius: 16, boxShadow: "0 2px 8px #e0e0e0", padding: 32, display: "flex", flexDirection: "column", gap: 16, minWidth: 260, alignItems: "center", justifyContent: "center", fontWeight: 700, fontSize: 28, color: "#111" }}>
+          231% 투자 달성
+          <div style={{ color: "#aaa", fontSize: 18, fontWeight: 500, marginTop: 12 }}>마감</div>
         </div>
-        <div style={{ background: "#fff", borderRadius: 12, boxShadow: "0 2px 8px #e0e0e0", padding: 24, display: "flex", flexDirection: "column", gap: 12, color: "#111" }}>
-          <div style={{ height: 120, background: "#e6f4d7", borderRadius: 8, marginBottom: 8, display: "flex", alignItems: "center", justifyContent: "center", color: "#bbb" }}>
-            상품 이미지
-          </div>
-          <div style={{ fontWeight: 700, fontSize: 18, color: "#111" }}>영광 굴비</div>
-          <div style={{ color: "#111" }}>수익률: 6.1%</div>
-          <div style={{ color: "#111" }}>모집금액: 1,500만원</div>
-          <button style={{ background: "#aaa", color: "#fff", border: "none", borderRadius: 6, padding: "8px 0", fontWeight: 600, fontSize: 15, marginTop: 8 }} disabled>마감</button>
+        <div style={{ flex: 1, background: "#ededed", borderRadius: 16, boxShadow: "0 2px 8px #e0e0e0", padding: 32, display: "flex", flexDirection: "column", gap: 16, minWidth: 260, alignItems: "center", justifyContent: "center", fontWeight: 700, fontSize: 28, color: "#111" }}>
+          231% 투자 달성
+          <div style={{ color: "#aaa", fontSize: 18, fontWeight: 500, marginTop: 12 }}>마감</div>
         </div>
-      </section>
-      {/* 페이지네이션 샘플 */}
-      <div style={{ display: "flex", justifyContent: "center", gap: 8, margin: "32px 0" }}>
-        <button style={{ border: "none", background: "#e6f4d7", borderRadius: 6, padding: "6px 14px", fontWeight: 600, color: "#4b5e2e" }}>1</button>
-        <button style={{ border: "none", background: "#fff", borderRadius: 6, padding: "6px 14px", fontWeight: 600, color: "#4b5e2e" }}>2</button>
-        <button style={{ border: "none", background: "#fff", borderRadius: 6, padding: "6px 14px", fontWeight: 600, color: "#4b5e2e" }}>3</button>
+      </div>
+      {/* +더보기 버튼 */}
+      <div style={{ display: "flex", justifyContent: "center", margin: "32px 0 0 0" }}>
+        <button style={{ background: "#fff", border: "1.5px solid #b2c7a7", borderRadius: 8, padding: "12px 0", width: 420, fontWeight: 600, fontSize: 18, color: "#111" }}>+더보기</button>
+      </div>
+      {/* 하단 FAANK 버튼 */}
+      <div style={{ display: "flex", justifyContent: "center", margin: "32px 0 40px 0" }}>
+        <button style={{ background: "#e6f4d7", color: "#6b8e23", border: "none", borderRadius: 8, padding: "18px 0", width: 420, fontWeight: 700, fontSize: 22, letterSpacing: 1 }}>Faank<br /><span style={{ fontSize: 15, fontWeight: 500, color: "#888" }}>투자정보 알아보기</span></button>
       </div>
     </div>
   );

@@ -8,6 +8,7 @@ export default function ClientLayout({ children }: { children: React.ReactNode }
   const pathname = usePathname();
   const isMypage = pathname.startsWith("/mypage");
   const isMain = pathname === "/";
+  const isProducts = pathname === "/products" || pathname.startsWith("/products/");
 
   // 메인페이지에서는 헤더/푸터/사이드바를 렌더링하지 않음
   if (isMain) {
@@ -23,9 +24,12 @@ export default function ClientLayout({ children }: { children: React.ReactNode }
             <Image src="/logo.png" alt="FAANK 로고" width={80} height={80} priority />
           </Link>
         </div>
-        <nav style={{ display: "flex", gap: 32, fontWeight: 500, fontSize: 17 }}>
+        <nav style={{ display: "flex", gap: 32, fontWeight: 500, fontSize: 17, alignItems: "center" }}>
           <Link href="/products">투자상품</Link>
           <Link href="/mypage">마이페이지</Link>
+          {!isProducts && (
+            <Link href="/products" style={{ background: "#b2c7a7", color: "#fff", borderRadius: 6, padding: "8px 18px", fontWeight: 700, fontSize: 16, marginLeft: 16, textDecoration: "none" }}>투자하기</Link>
+          )}
         </nav>
       </header>
       {/* 전체 레이아웃 */}
@@ -54,7 +58,6 @@ export default function ClientLayout({ children }: { children: React.ReactNode }
             <div>
               <div style={{ fontWeight: 700, fontSize: 18, marginBottom: 16, color: "#111" }}>서비스</div>
               <div style={{ color: "#111", lineHeight: 2 }}>
-                <div>투자하기</div>
                 <div>서비스 소개</div>
                 <div>매거진</div>
                 <div>공지사항</div>
