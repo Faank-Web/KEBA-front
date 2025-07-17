@@ -1,5 +1,6 @@
 "use client";
 import React from "react";
+import Image from "next/image";
 
 const scrollToSection = (id: string) => {
   if (typeof window !== "undefined") {
@@ -13,9 +14,9 @@ export default function HomePage() {
     <>
       <div style={{ maxWidth: 1200, margin: "0 auto", padding: "0 24px", color: "#111" }}>
         {/* 상단 메뉴 */}
-        <nav style={{ display: "flex", justifyContent: "space-between", alignItems: "center", height: 72, borderBottom: "1px solid #e0e0e0", marginBottom: 24 }}>
+        <nav style={{ display: "flex", justifyContent: "space-between", alignItems: "center", height: 92, borderBottom: "1px solid #e0e0e0", marginBottom: 24 }}>
           <div style={{ display: "flex", alignItems: "center", gap: 32 }}>
-            <span style={{ fontWeight: 900, fontSize: 28, letterSpacing: 2 }}>Faank</span>
+            <Image src="/logo.png" alt="FAANK 로고" width={80} height={80} priority />
             <button onClick={() => scrollToSection("about-section")} style={{ background: "none", border: "none", fontSize: 17, color: "#111", cursor: "pointer" }}>서비스소개</button>
             <button onClick={() => scrollToSection("magazine-section")} style={{ background: "none", border: "none", fontSize: 17, color: "#111", cursor: "pointer" }}>매거진</button>
             <button onClick={() => scrollToSection("notice-section")} style={{ background: "none", border: "none", fontSize: 17, color: "#111", cursor: "pointer" }}>공지사항</button>
