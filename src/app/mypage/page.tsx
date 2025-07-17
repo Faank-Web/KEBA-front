@@ -172,7 +172,7 @@ export default function MyPage() {
                 >
                   {STATUS_HELP.map((item) => (
                     <div key={item.title} style={{ marginBottom: 18 }}>
-                      <div style={{ fontWeight: 700, fontSize: 16, marginBottom: 4 }}>{item.title}</div>
+                      <div style={{ fontWeight: 700, fontSize: 16, marginBottom: 4, color: "#111" }}>{item.title}</div>
                       <div style={{ color: "#888", fontSize: 15 }}>{item.desc}</div>
                     </div>
                   ))}
