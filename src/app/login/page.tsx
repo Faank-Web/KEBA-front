@@ -135,16 +135,16 @@ export default function LoginPage() {
           <div style={{
             background: "#fff",
             borderRadius: 16,
-            padding: 32,
+            padding: 20,
             width: "90%",
-            maxWidth: 400,
-            maxHeight: "80vh",
+            maxWidth: 340,
+            maxHeight: "60vh",
             overflow: "auto"
           }} onClick={(e) => e.stopPropagation()}>
             
             {/* 모달 헤더 */}
-            <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: 24 }}>
-              <span style={{ fontSize: 24, fontWeight: 700, color: "#111" }}>비밀번호 6자리 등록</span>
+            <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: 16 }}>
+              <span style={{ fontSize: 18, fontWeight: 700, color: "#111" }}>비밀번호 6자리 등록</span>
               <button
                 onClick={closePasswordModal}
                 style={{
@@ -160,11 +160,9 @@ export default function LoginPage() {
               </button>
             </div>
 
-            <div style={{ textAlign: "center", marginBottom: 32 }}>
-              <div style={{ fontSize: 16, color: "#666", marginBottom: 16 }}>로그인시 사용할 비밀번호를 입력해주세요</div>
-              
+            <div style={{ textAlign: "center", marginBottom: 16 }}>
               {/* 비밀번호 입력 상태 표시 */}
-              <div style={{ display: "flex", justifyContent: "center", gap: 8, marginBottom: 24 }}>
+              <div style={{ display: "flex", justifyContent: "center", gap: 6, marginBottom: 12 }}>
                 {[1, 2, 3, 4, 5, 6].map((num) => (
                   <div
                     key={num}
@@ -182,36 +180,36 @@ export default function LoginPage() {
               {/* 비밀번호 입력 필드 */}
               <div style={{
                 width: "100%",
-                padding: 16,
+                padding: 10,
                 borderRadius: 8,
                 border: "2px solid #e74c3c",
-                fontSize: 18,
+                fontSize: 15,
                 textAlign: "center",
-                letterSpacing: "8px",
-                marginBottom: 16,
+                letterSpacing: "5px",
+                marginBottom: 10,
                 background: "#f8f8f8",
-                minHeight: "60px",
+                minHeight: "45px",
                 display: "flex",
                 alignItems: "center",
                 justifyContent: "center"
               }}>
                 {password.split('').map((char, index) => (
-                  <span key={index} style={{ fontSize: 24, fontWeight: 700, color: "#111" }}>●</span>
+                  <span key={index} style={{ fontSize: 18, fontWeight: 700, color: "#111" }}>●</span>
                 ))}
                 {password.length < 6 && (
                   <span style={{ 
                     width: "2px", 
-                    height: "24px", 
+                    height: "18px", 
                     background: "#e74c3c", 
                     animation: "blink 1s infinite",
-                    marginLeft: "4px"
+                    marginLeft: "2px"
                   }} />
                 )}
               </div>
             </div>
 
             {/* 숫자 키패드 */}
-            <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: 12, marginBottom: 24 }}>
+            <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: 6, marginBottom: 12 }}>
               {[1, 2, 3, 4, 5, 6, 7, 8, 9].map((num) => (
                 <button
                   key={num}
@@ -222,11 +220,11 @@ export default function LoginPage() {
                   }}
                   style={{
                     width: "100%",
-                    height: 60,
+                    height: 45,
                     border: "1px solid #ddd",
                     borderRadius: 8,
                     background: "#fff",
-                    fontSize: 20,
+                    fontSize: 16,
                     fontWeight: 600,
                     color: "#111",
                     cursor: "pointer",
@@ -246,11 +244,11 @@ export default function LoginPage() {
                 }}
                 style={{
                   width: "100%",
-                  height: 60,
+                  height: 45,
                   border: "1px solid #ddd",
                   borderRadius: 8,
                   background: "#fff",
-                  fontSize: 20,
+                  fontSize: 16,
                   fontWeight: 600,
                   color: "#111",
                   cursor: "pointer",
@@ -269,11 +267,11 @@ export default function LoginPage() {
                 }}
                 style={{
                   width: "100%",
-                  height: 60,
+                  height: 45,
                   border: "1px solid #ddd",
                   borderRadius: 8,
                   background: "#fff",
-                  fontSize: 20,
+                  fontSize: 16,
                   fontWeight: 600,
                   color: "#111",
                   cursor: "pointer",
@@ -294,9 +292,9 @@ export default function LoginPage() {
                 color: "#fff", 
                 border: "none", 
                 borderRadius: 8, 
-                padding: "16px 0", 
+                padding: "10px 0", 
                 fontWeight: 600, 
-                fontSize: 16,
+                fontSize: 15,
                 cursor: password.length === 6 ? "pointer" : "not-allowed"
               }}
             >
