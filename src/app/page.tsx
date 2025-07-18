@@ -50,16 +50,19 @@ export default function HomePage() {
   return (
     <>
       {/* 상단 메뉴 */}
-      <header style={{ height: 80, background: "#fff", borderBottom: "1px solid #e0e0e0", display: "flex", alignItems: "center", padding: "0 40px", fontWeight: 700, fontSize: 20, color: "#6b8e23", justifyContent: "space-between" }}>
-        <div style={{ display: "flex", alignItems: "center", gap: 16 }}>
+      <header style={{ height: 80, background: "#fff", borderBottom: "2px solid #b2c7a7", display: "flex", alignItems: "center", padding: "0 40px", fontWeight: 700, fontSize: 20, color: "#111", justifyContent: "space-between" }}>
+        <div style={{ display: "flex", alignItems: "center", gap: 32 }}>
           <Image src="/logo.png" alt="FAANK 로고" width={80} height={80} priority />
+          <button onClick={() => scrollToSection("about-section")} style={{ background: "none", border: "none", fontSize: 16, color: "#666", cursor: "pointer", fontWeight: 500 }}>서비스소개</button>
+          <button onClick={() => scrollToSection("magazine-section")} style={{ background: "none", border: "none", fontSize: 16, color: "#666", cursor: "pointer", fontWeight: 500 }}>매거진</button>
+          <button onClick={() => scrollToSection("notice-section")} style={{ background: "none", border: "none", fontSize: 16, color: "#666", cursor: "pointer", fontWeight: 500 }}>공지사항</button>
         </div>
-        <nav style={{ display: "flex", gap: 32, fontWeight: 500, fontSize: 17, alignItems: "center" }}>
-          <button onClick={() => scrollToSection("about-section")} style={{ background: "none", border: "none", fontSize: 17, color: "#6b8e23", cursor: "pointer", fontWeight: 500 }}>서비스소개</button>
-          <button onClick={() => scrollToSection("magazine-section")} style={{ background: "none", border: "none", fontSize: 17, color: "#6b8e23", cursor: "pointer", fontWeight: 500 }}>매거진</button>
-          <button onClick={() => scrollToSection("notice-section")} style={{ background: "none", border: "none", fontSize: 17, color: "#6b8e23", cursor: "pointer", fontWeight: 500 }}>공지사항</button>
-          <a href="/products" style={{ background: "#b2c7a7", color: "#fff", borderRadius: 6, padding: "8px 18px", fontWeight: 700, fontSize: 16, marginLeft: 16, textDecoration: "none" }}>투자하기</a>
-        </nav>
+        <div style={{ display: "flex", alignItems: "center", gap: 20 }}>
+          <a href="/products" style={{ background: "#6b8e23", color: "#fff", borderRadius: 6, padding: "8px 18px", fontWeight: 700, fontSize: 16, textDecoration: "none" }}>투자하기</a>
+          <a href="/login" style={{ color: "#666", fontWeight: 500, fontSize: 16, textDecoration: "none" }}>로그인</a>
+          <span style={{ color: "#666", fontSize: 16 }}>/</span>
+          <a href="/signup" style={{ color: "#666", fontWeight: 500, fontSize: 16, textDecoration: "none" }}>회원가입</a>
+        </div>
       </header>
 
       <div style={{ maxWidth: 1100, margin: "0 auto", padding: "0 24px", color: "#111" }}>
