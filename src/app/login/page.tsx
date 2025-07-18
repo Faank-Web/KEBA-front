@@ -47,7 +47,7 @@ export default function LoginPage() {
       // 로그인 성공 - 실제로는 서버에서 인증 후 토큰을 저장
       localStorage.setItem("isLoggedIn", "true");
       alert("로그인 성공!");
-      router.push("/products");
+      router.push("/");
     } else {
       setError("비밀번호가 올바르지 않습니다.");
       setPassword("");
