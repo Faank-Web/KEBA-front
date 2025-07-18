@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Image from "next/image";
 
 const scrollToSection = (id: string) => {
@@ -28,6 +28,15 @@ const AUCTION_DATA = [
 export default function HomePage() {
   const [currentBanner, setCurrentBanner] = useState(0);
   const [currentAuction, setCurrentAuction] = useState(0);
+  const [showScrollTop, setShowScrollTop] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setShowScrollTop(window.scrollY > 200);
+    };
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
 
   // 배너 슬라이더 함수들
   const nextBanner = () => {
@@ -65,6 +74,7 @@ export default function HomePage() {
         </div>
       </header>
 
+      {/* 페이지 주요 내용 */}
       <div style={{ maxWidth: 1100, margin: "0 auto", padding: "0 24px", color: "#111" }}>
         {/* 홍보영상 및 이벤트 이미지 배너 */}
         <div style={{ background: "#f8f8f8", borderRadius: 12, padding: "60px 40px", marginBottom: 40, position: "relative", display: "flex", alignItems: "center", justifyContent: "center", overflow: "hidden" }}>
@@ -318,6 +328,36 @@ export default function HomePage() {
           </ul>
         </section>
       </div>
+
+      {/* 맨 위로 스크롤 버튼 */}
+      {showScrollTop && (
+        <button
+          onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
+          style={{
+            position: "fixed",
+            right: 24,
+            top: "50%",
+            transform: "translateY(-50%)",
+            width: 44,
+            height: 44,
+            borderRadius: "50%",
+            background: "#fff",
+            border: "2px solid #b2c7a7",
+            boxShadow: "0 2px 8px #e0e0e0",
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            fontSize: 24,
+            color: "#6b8e23",
+            cursor: "pointer",
+            zIndex: 1000,
+            transition: "opacity 0.3s"
+          }}
+          aria-label="맨 위로"
+        >
+          ▲
+        </button>
+      )}
 
       {/* 피그마 스타일 푸터 */}
       <footer style={{ background: "#ededed", borderTop: "1px solid #e0e0e0", padding: "40px 0 0 0", marginTop: 40, color: "#111" }}>
