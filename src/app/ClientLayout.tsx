@@ -11,6 +11,17 @@ const scrollToSection = (id: string) => {
   }
 };
 
+function goToMainAndScroll(sectionId: string, isMain: boolean) {
+  if (isMain) {
+    scrollToSection(sectionId);
+  } else {
+    window.location.href = '/';
+    setTimeout(() => {
+      scrollToSection(sectionId);
+    }, 500);
+  }
+}
+
 export default function ClientLayout({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
   const isMypage = pathname.startsWith("/mypage");
@@ -39,9 +50,9 @@ export default function ClientLayout({ children }: { children: React.ReactNode }
           <Link href="/" style={{ display: "flex", alignItems: "center", textDecoration: "none" }}>
             <Image src="/logo.png" alt="FAANK 로고" width={120} height={120} priority />
           </Link>
-          <Link href="/about" style={{ background: "none", border: "none", fontSize: 16, color: "#666", cursor: "pointer", fontWeight: 500, textDecoration: "none" }}>서비스소개</Link>
-          <Link href="/magazine" style={{ background: "none", border: "none", fontSize: 16, color: "#666", cursor: "pointer", fontWeight: 500, textDecoration: "none" }}>매거진</Link>
-          <Link href="/notice" style={{ background: "none", border: "none", fontSize: 16, color: "#666", cursor: "pointer", fontWeight: 500, textDecoration: "none" }}>공지사항</Link>
+          <button onClick={() => goToMainAndScroll('about-section', isMain)} style={{ background: "none", border: "none", fontSize: 16, color: "#666", cursor: "pointer", fontWeight: 500 }}>서비스소개</button>
+          <button onClick={() => goToMainAndScroll('magazine-section', isMain)} style={{ background: "none", border: "none", fontSize: 16, color: "#666", cursor: "pointer", fontWeight: 500 }}>매거진</button>
+          <button onClick={() => goToMainAndScroll('notice-section', isMain)} style={{ background: "none", border: "none", fontSize: 16, color: "#666", cursor: "pointer", fontWeight: 500 }}>공지사항</button>
         </div>
         <div style={{ display: "flex", alignItems: "center", gap: 20 }}>
           {isLoggedIn ? (

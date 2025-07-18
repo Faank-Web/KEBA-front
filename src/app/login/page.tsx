@@ -114,9 +114,7 @@ export default function LoginPage() {
         </button>
       </div>
       
-      <div style={{ textAlign: "center", marginTop: 18 }}>
-        <span style={{ color: "#111", fontSize: 15 }}>비밀번호를 잊으셨나요?</span>
-      </div>
+      {/* '비밀번호를 잊으셨나요?' 멘트 삭제됨 */}
 
       {/* 비밀번호 입력 모달 */}
       {showPasswordModal && (
