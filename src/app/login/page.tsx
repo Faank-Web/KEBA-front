@@ -2,11 +2,31 @@
 import React, { useState } from "react";
 import { useRouter } from "next/navigation";
 
+// 휴대폰 번호 포맷팅 함수
+const formatPhoneNumber = (value: string) => {
+  // 숫자만 추출
+  const numbers = value.replace(/[^\d]/g, '');
+  
+  // 길이에 따라 포맷팅
+  if (numbers.length <= 3) {
+    return numbers;
+  } else if (numbers.length <= 7) {
+    return `${numbers.slice(0, 3)}-${numbers.slice(3)}`;
+  } else {
+    return `${numbers.slice(0, 3)}-${numbers.slice(3, 7)}-${numbers.slice(7, 11)}`;
+  }
+};
+
 export default function LoginPage() {
   const [phoneNumber, setPhoneNumber] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
   const router = useRouter();
+
+  const handlePhoneNumberChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const formatted = formatPhoneNumber(e.target.value);
+    setPhoneNumber(formatted);
+  };
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -43,7 +63,8 @@ export default function LoginPage() {
             type="tel" 
             placeholder="010-1234-5678" 
             value={phoneNumber}
-            onChange={(e) => setPhoneNumber(e.target.value)}
+            onChange={handlePhoneNumberChange}
+            maxLength={13}
             style={{ width: "100%", padding: 10, borderRadius: 6, border: "1px solid #b2c7a7", fontSize: 16, marginTop: 4, color: "#111" }} 
           />
         </div>
