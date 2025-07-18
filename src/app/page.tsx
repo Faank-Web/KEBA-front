@@ -12,23 +12,143 @@ const scrollToSection = (id: string) => {
 export default function HomePage() {
   return (
     <>
-      <div style={{ maxWidth: 1200, margin: "0 auto", padding: "0 24px", color: "#111" }}>
-        {/* 상단 메뉴 */}
-        <nav style={{ display: "flex", justifyContent: "space-between", alignItems: "center", height: 92, borderBottom: "1px solid #e0e0e0", marginBottom: 24 }}>
-          <div style={{ display: "flex", alignItems: "center", gap: 32 }}>
-            <Image src="/logo.png" alt="FAANK 로고" width={80} height={80} priority />
-            <button onClick={() => scrollToSection("about-section")} style={{ background: "none", border: "none", fontSize: 17, color: "#111", cursor: "pointer" }}>서비스소개</button>
-            <button onClick={() => scrollToSection("magazine-section")} style={{ background: "none", border: "none", fontSize: 17, color: "#111", cursor: "pointer" }}>매거진</button>
-            <button onClick={() => scrollToSection("notice-section")} style={{ background: "none", border: "none", fontSize: 17, color: "#111", cursor: "pointer" }}>공지사항</button>
-          </div>
-          <div style={{ display: "flex", alignItems: "center", gap: 20 }}>
-            <a href="/products" style={{ background: "#b2c7a7", color: "#fff", borderRadius: 6, padding: "8px 18px", fontWeight: 700, fontSize: 16, marginRight: 8, textDecoration: "none" }}>투자하기</a>
-            <a href="/login" style={{ color: "#111", fontWeight: 500, fontSize: 16, marginLeft: 8, textDecoration: "none" }}>로그인</a>
-            <a href="/signup" style={{ color: "#111", fontWeight: 500, fontSize: 16, marginLeft: 8, textDecoration: "none" }}>회원가입</a>
-          </div>
+      {/* 상단 메뉴 */}
+      <header style={{ height: 80, background: "#fff", borderBottom: "1px solid #e0e0e0", display: "flex", alignItems: "center", padding: "0 40px", fontWeight: 700, fontSize: 20, color: "#6b8e23", justifyContent: "space-between" }}>
+        <div style={{ display: "flex", alignItems: "center", gap: 16 }}>
+          <Image src="/logo.png" alt="FAANK 로고" width={80} height={80} priority />
+        </div>
+        <nav style={{ display: "flex", gap: 32, fontWeight: 500, fontSize: 17, alignItems: "center" }}>
+          <button onClick={() => scrollToSection("about-section")} style={{ background: "none", border: "none", fontSize: 17, color: "#6b8e23", cursor: "pointer", fontWeight: 500 }}>서비스소개</button>
+          <button onClick={() => scrollToSection("magazine-section")} style={{ background: "none", border: "none", fontSize: 17, color: "#6b8e23", cursor: "pointer", fontWeight: 500 }}>매거진</button>
+          <button onClick={() => scrollToSection("notice-section")} style={{ background: "none", border: "none", fontSize: 17, color: "#6b8e23", cursor: "pointer", fontWeight: 500 }}>공지사항</button>
+          <a href="/products" style={{ background: "#b2c7a7", color: "#fff", borderRadius: 6, padding: "8px 18px", fontWeight: 700, fontSize: 16, marginLeft: 16, textDecoration: "none" }}>투자하기</a>
         </nav>
+      </header>
 
-        {/* 서비스소개 섹션 */}
+      <div style={{ maxWidth: 1100, margin: "0 auto", padding: "0 24px", color: "#111" }}>
+        {/* 홍보영상 및 이벤트 이미지 배너 */}
+        <div style={{ background: "#f8f8f8", borderRadius: 12, padding: "60px 40px", marginBottom: 40, position: "relative", display: "flex", alignItems: "center", justifyContent: "center" }}>
+          <div style={{ fontSize: 24, fontWeight: 700, color: "#666" }}>홍보영상 및 이벤트 이미지</div>
+          <div style={{ position: "absolute", left: 20, top: "50%", transform: "translateY(-50%)", fontSize: 24, color: "#ccc", cursor: "pointer" }}>‹</div>
+          <div style={{ position: "absolute", right: 20, top: "50%", transform: "translateY(-50%)", fontSize: 24, color: "#ccc", cursor: "pointer" }}>›</div>
+        </div>
+
+        {/* 3개 콘텐츠 블록 */}
+        <div style={{ display: "flex", gap: 24, marginBottom: 60 }}>
+          {/* 왼쪽 블록 - 실제 상품 기반 메시지 */}
+          <div style={{ flex: 1, background: "#fff", borderRadius: 12, padding: 32, boxShadow: "0 2px 8px #e0e0e0" }}>
+            <div style={{ fontSize: 20, fontWeight: 700, color: "#6b8e23", lineHeight: 1.6 }}>
+              <span>실제로 </span>
+              <span style={{ background: "#fff3cd", color: "#856404" }}>만져보고</span>
+              <br />
+              <span>먹어본 상품이,</span>
+              <br />
+              <span>내 수익의 </span>
+              <span style={{ background: "#fff3cd", color: "#856404" }}>기반이 됩니다.</span>
+            </div>
+          </div>
+
+          {/* 중간 블록 - 인기 투자 상품 */}
+          <div style={{ flex: 1, background: "#f8f8f8", borderRadius: 12, padding: 32, boxShadow: "0 2px 8px #e0e0e0" }}>
+            <div style={{ display: "flex", alignItems: "center", gap: 8, marginBottom: 16 }}>
+              <span style={{ fontSize: 20 }}>🔥</span>
+              <span style={{ fontSize: 16, fontWeight: 600, color: "#666" }}>실시간 인기 투자 상품</span>
+            </div>
+            <div style={{ fontSize: 22, fontWeight: 700, color: "#111", marginBottom: 8 }}>전략형 투자 상품</div>
+            <div style={{ fontSize: 16, color: "#666" }}>○○○농장</div>
+          </div>
+
+          {/* 오른쪽 블록 - 통계 */}
+          <div style={{ flex: 1, background: "#f3fbe7", borderRadius: 12, padding: 32, boxShadow: "0 2px 8px #e0e0e0" }}>
+            <div style={{ marginBottom: 20 }}>
+              <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: 8 }}>
+                <span style={{ fontSize: 16, fontWeight: 600, color: "#6b8e23" }}>누적 회원 수</span>
+                <span style={{ fontSize: 18, fontWeight: 700, color: "#111" }}>99,999명</span>
+              </div>
+              <div style={{ background: "#e0e0e0", height: 8, borderRadius: 4, overflow: "hidden" }}>
+                <div style={{ background: "#6b8e23", height: "100%", width: "85%" }}></div>
+              </div>
+            </div>
+            <div style={{ marginBottom: 20 }}>
+              <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: 8 }}>
+                <span style={{ fontSize: 16, fontWeight: 600, color: "#6b8e23" }}>투자자 수</span>
+                <span style={{ fontSize: 18, fontWeight: 700, color: "#111" }}>99,999명</span>
+              </div>
+              <div style={{ background: "#e0e0e0", height: 8, borderRadius: 4, overflow: "hidden" }}>
+                <div style={{ background: "#6b8e23", height: "100%", width: "70%" }}></div>
+              </div>
+            </div>
+            <div>
+              <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: 8 }}>
+                <span style={{ fontSize: 16, fontWeight: 600, color: "#6b8e23" }}>누적 투자금</span>
+                <span style={{ fontSize: 18, fontWeight: 700, color: "#111" }}>99.9억</span>
+              </div>
+              <div style={{ background: "#e0e0e0", height: 8, borderRadius: 4, overflow: "hidden" }}>
+                <div style={{ background: "#6b8e23", height: "100%", width: "60%" }}></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* 경매 TOP10 섹션 */}
+        <section style={{ marginBottom: 60 }}>
+          <h2 style={{ fontSize: 28, fontWeight: 700, marginBottom: 32, textAlign: "center" }}>경매 TOP10</h2>
+          
+          {/* 상단 캐러셀 */}
+          <div style={{ background: "#f8f8f8", borderRadius: 12, padding: "40px 20px", marginBottom: 32, position: "relative" }}>
+            <div style={{ display: "flex", justifyContent: "center", alignItems: "center", gap: 40 }}>
+              {[1, 2, 3, 4, 5].map((item) => (
+                <div key={item} style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: 12 }}>
+                  <div style={{ width: 80, height: 80, background: "#e0e0e0", borderRadius: "50%", display: "flex", alignItems: "center", justifyContent: "center", fontSize: 24, color: "#999" }}>
+                    🐄
+                  </div>
+                  <div style={{ fontSize: 16, fontWeight: 600, color: "#666" }}>○○○농장</div>
+                </div>
+              ))}
+            </div>
+            <div style={{ position: "absolute", left: 20, top: "50%", transform: "translateY(-50%)", fontSize: 24, color: "#ccc", cursor: "pointer" }}>‹</div>
+            <div style={{ position: "absolute", right: 20, top: "50%", transform: "translateY(-50%)", fontSize: 24, color: "#ccc", cursor: "pointer" }}>›</div>
+          </div>
+
+          {/* 하단 상세 데이터 테이블 */}
+          <div style={{ background: "#fff", borderRadius: 12, overflow: "hidden", boxShadow: "0 2px 8px #e0e0e0" }}>
+            <div style={{ display: "grid", gridTemplateColumns: "200px repeat(5, 1fr)", borderBottom: "1px solid #e0e0e0" }}>
+              {/* 헤더 */}
+              <div style={{ background: "#f8f8f8", padding: "16px", fontWeight: 700, color: "#111", borderRight: "1px solid #e0e0e0" }}>구분</div>
+              {[1, 2, 3, 4, 5].map((item) => (
+                <div key={item} style={{ background: "#f8f8f8", padding: "16px", fontWeight: 700, color: "#111", textAlign: "center", borderRight: item === 5 ? "none" : "1px solid #e0e0e0" }}>
+                  {item}번
+                </div>
+              ))}
+            </div>
+            
+            {/* 데이터 행들 */}
+            {[
+              { label: "출하 개월", values: ["30개월", "29개월", "29개월", "30개월", "30개월"] },
+              { label: "육질 등급", values: ["1++등급", "1++등급", "1++등급", "1++등급", "1++등급"] },
+              { label: "육량 등급", values: ["B", "B", "B", "B", "B"] },
+              { label: "도체중", values: ["546kg", "533kg", "599kg", "593kg", "552kg"] },
+              { label: "유전 능력", values: ["등심면적 우등생", "마블링 우등생", "등심면적 우등생", "등등 우등생", "마블링 우등생"] },
+              { label: "냉도체중", values: ["A", "D", "A", "A", "A"] },
+              { label: "근단면적", values: ["A", "D", "A", "B", "B"] },
+              { label: "근내지방도", values: ["A", "A", "A", "C", "A"] },
+              { label: "등지방두제", values: ["C", "A", "C", "C", "B"] }
+            ].map((row, index) => (
+              <div key={index} style={{ display: "grid", gridTemplateColumns: "200px repeat(5, 1fr)", borderBottom: index === 8 ? "none" : "1px solid #e0e0e0" }}>
+                <div style={{ background: "#f8f8f8", padding: "12px 16px", fontWeight: 600, color: "#111", borderRight: "1px solid #e0e0e0", fontSize: 14 }}>
+                  {row.label}
+                </div>
+                {row.values.map((value, valueIndex) => (
+                  <div key={valueIndex} style={{ padding: "12px 16px", textAlign: "center", borderRight: valueIndex === 4 ? "none" : "1px solid #e0e0e0", fontSize: 14 }}>
+                    {value}
+                  </div>
+                ))}
+              </div>
+            ))}
+          </div>
+        </section>
+
+        {/* 기존 섹션들 */}
         <section id="about-section" style={{ padding: "80px 0 60px 0", borderBottom: "1px solid #eee" }}>
           <h2 style={{ fontSize: 28, fontWeight: 700, marginBottom: 24 }}>서비스 소개</h2>
           <div style={{ fontSize: 18, marginBottom: 12 }}>실제 물건과 연계된 상품에 투자하여 내 수익의 기회가 됩니다.</div>
@@ -44,7 +164,6 @@ export default function HomePage() {
           </div>
         </section>
 
-        {/* 매거진 섹션 */}
         <section id="magazine-section" style={{ padding: "80px 0 60px 0", borderBottom: "1px solid #eee" }}>
           <h2 style={{ fontSize: 28, fontWeight: 700, marginBottom: 24 }}>매거진</h2>
           <div style={{ display: "flex", gap: 24 }}>
@@ -59,7 +178,6 @@ export default function HomePage() {
           </div>
         </section>
 
-        {/* 공지사항 섹션 */}
         <section id="notice-section" style={{ padding: "80px 0 60px 0", borderBottom: "1px solid #eee" }}>
           <h2 style={{ fontSize: 28, fontWeight: 700, marginBottom: 24 }}>공지사항</h2>
           <ul style={{ fontSize: 17, color: "#111", lineHeight: 2 }}>
@@ -68,13 +186,11 @@ export default function HomePage() {
             <li>2024-06-10 투자 가이드 업데이트</li>
           </ul>
         </section>
-
-        {/* 투자하기 섹션 제거됨 */}
       </div>
 
       {/* 피그마 스타일 푸터 */}
       <footer style={{ background: "#ededed", borderTop: "1px solid #e0e0e0", padding: "40px 0 0 0", marginTop: 40, color: "#111" }}>
-        <div style={{ maxWidth: 1200, margin: "0 auto", padding: "0 32px" }}>
+        <div style={{ maxWidth: 1100, margin: "0 auto", padding: "0 32px" }}>
           <div style={{ display: "flex", justifyContent: "space-between", gap: 32, flexWrap: "wrap", color: "#111" }}>
             {/* 서비스 */}
             <div>
@@ -108,28 +224,18 @@ export default function HomePage() {
                 <div>마케팅 수신동의</div>
               </div>
             </div>
-            {/* 앱 다운로드 */}
-            <div>
-              <div style={{ fontWeight: 700, fontSize: 18, marginBottom: 16, color: "#111" }}>앱 다운로드</div>
-              <div style={{ display: "flex", gap: 12, marginTop: 8 }}>
-                <button style={{ background: "#fff", border: "1px solid #ccc", borderRadius: 8, padding: "8px 18px", fontWeight: 600, fontSize: 15, cursor: "pointer", color: "#111" }}>App store</button>
-                <button style={{ background: "#fff", border: "1px solid #ccc", borderRadius: 8, padding: "8px 18px", fontWeight: 600, fontSize: 15, cursor: "pointer", color: "#111" }}>Google Play</button>
-              </div>
-            </div>
           </div>
           {/* 하단 회사 정보 */}
           <div style={{ borderTop: "1px solid #ccc", marginTop: 32, padding: "24px 0 12px 0", color: "#111", fontSize: 14, lineHeight: 1.7 }}>
             <div style={{ display: "flex", flexWrap: "wrap", gap: 32, justifyContent: "space-between" }}>
               <div>
-                (주)한국어스퍼트블럭협회 | 대표 최호원<br />
+                (주)한국엑스퍼트브랜드협회 | 대표: 최윤희<br />
                 주소: 경기도 하남시 미사강변한강로 279 129, 130호<br />
-                사업자등록번호: 737-87-02891<br />
-                법인 등록번호: 00000-0000000<br />
-                통신판매업 신고번호: 제 2025-가나다-0000 호
+                사업자등록번호 737-87-02891<br />
               </div>
               <div>
-                전화: 010-4747-2102 (평일 10시 ~ 17시)<br />
-                Email(문의): rassom06@naver.com
+                메일: rassom@naver.com | 번호: 010. 7586. 2102<br />
+                팩스: 0504-167-2102<br />
               </div>
             </div>
           </div>
