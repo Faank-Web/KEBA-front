@@ -37,10 +37,43 @@ export default function ProductDetailPage() {
               <div style={{ color: "#888", fontSize: 14, marginBottom: 8 }}>최대 0%~00% 수익 목표</div>
               <div style={{ color: "#b2c7a7", fontWeight: 600, fontSize: 14 }}>Faank 목표 수익 시뮬레이터</div>
               <div style={{ color: "#6b8e23", fontWeight: 700, fontSize: 16, marginTop: 12 }}>0,000~00만원</div>
+              
+              {/* 목표 수익 그래프 */}
+              <div style={{ marginTop: 16 }}>
+                <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 8 }}>
+                  <span style={{ fontSize: 14, color: "#666" }}>목표 달성률</span>
+                  <span style={{ fontSize: 16, fontWeight: 700, color: "#6b8e23" }}>75%</span>
+                </div>
+                <div style={{ background: "#e0e0e0", borderRadius: 6, height: 12, width: "100%", marginBottom: 8, position: "relative" }}>
+                  <div style={{ background: "linear-gradient(90deg, #b2c7a7, #6b8e23)", width: "75%", height: 12, borderRadius: 6 }}></div>
+                  <div style={{ position: "absolute", left: "75%", top: -2, width: 0, height: 0, borderLeft: "6px solid #6b8e23", borderTop: "8px solid transparent", borderBottom: "8px solid transparent" }}></div>
+                </div>
+                <div style={{ display: "flex", justifyContent: "space-between", fontSize: 12, color: "#666" }}>
+                  <span>0%</span>
+                  <span>50%</span>
+                  <span>100%</span>
+                </div>
+              </div>
+              
+              {/* 수익률 그래프 */}
+              <div style={{ marginTop: 16 }}>
+                <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 8 }}>
+                  <span style={{ fontSize: 14, color: "#666" }}>예상 수익률</span>
+                  <span style={{ fontSize: 16, fontWeight: 700, color: "#6b8e23" }}>12.5%</span>
+                </div>
+                <div style={{ background: "#e0e0e0", borderRadius: 6, height: 12, width: "100%", marginBottom: 8, position: "relative" }}>
+                  <div style={{ background: "linear-gradient(90deg, #ffd700, #ffa500)", width: "62.5%", height: 12, borderRadius: 6 }}></div>
+                  <div style={{ position: "absolute", left: "62.5%", top: -2, width: 0, height: 0, borderLeft: "6px solid #ffa500", borderTop: "8px solid transparent", borderBottom: "8px solid transparent" }}></div>
+                </div>
+                <div style={{ display: "flex", justifyContent: "space-between", fontSize: 12, color: "#666" }}>
+                  <span>0%</span>
+                  <span>10%</span>
+                  <span>20%</span>
+                </div>
+              </div>
             </div>
             {/* 실시간 타이머/투자 */}
             <div style={{ flex: 1.2, background: "#f6fff0", borderRadius: 14, padding: 24, boxShadow: "0 2px 8px #e0e0e0", display: "flex", flexDirection: "column", alignItems: "center" }}>
-              <div style={{ color: "#ff2222", fontWeight: 700, fontSize: 17, marginBottom: 8 }}>실시간 타이머</div>
               <div style={{ color: "#222", fontWeight: 700, fontSize: 18, marginBottom: 8 }}>마감까지 7일 00:00:00</div>
               <div style={{ width: "100%", margin: "8px 0" }}>
                 <div style={{ color: "#6b8e23", fontWeight: 700, fontSize: 15, marginBottom: 4 }}>70%</div>

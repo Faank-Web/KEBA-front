@@ -1,5 +1,6 @@
 "use client";
 import React, { useState } from "react";
+import { useRouter } from "next/navigation";
 
 const ACCOUNTS = [
   { bank: "신한투자증권", account: "110-1234-5678-90", icon: "S" },
@@ -10,6 +11,7 @@ export default function InvestApplyPage() {
   const [showModal, setShowModal] = useState(false);
   const [selectedAccount, setSelectedAccount] = useState<number | null>(null);
   const [copied, setCopied] = useState(false);
+  const router = useRouter();
 
   const handleAccountClick = (idx: number) => {
     setSelectedAccount(idx);
@@ -26,13 +28,19 @@ export default function InvestApplyPage() {
     setSelectedAccount(null);
     setCopied(false);
   };
+  const handlePrevious = () => {
+    router.back();
+  };
 
   return (
     <div style={{ maxWidth: 1100, margin: "40px auto", padding: "0 24px", color: "#111", background: "#fff", borderRadius: 16, boxShadow: "0 2px 12px #e0e0e0", position: "relative" }}>
       {/* 상단 혜택 안내 */}
-      <div style={{ fontSize: 18, color: "#bdbdbd", fontWeight: 500, margin: "32px 0 0 0" }}>놓치면 아쉬운 투자 킷 혜택</div>
-      <div style={{ background: "#b2c7a7", color: "#fff", fontWeight: 700, fontSize: 22, borderRadius: 10, padding: "18px 0", textAlign: "center", margin: "18px 0 32px 0" }}>
-        놓치면 아쉬운 투자 킷 혜택
+      <div style={{ fontSize: 18, color: "#bdbdbd", fontWeight: 500, margin: "32px 0 0 0" }}>놓치면 아쉬운 투자 전 혜택</div>
+      <div style={{ background: "#b2c7a7", color: "#fff", fontWeight: 700, fontSize: 22, borderRadius: 10, padding: "18px 0", textAlign: "center", margin: "18px 0 16px 0" }}>
+        놓치면 아쉬운 투자 전 혜택
+      </div>
+      <div style={{ background: "#e6f4d7", color: "#6b8e23", fontWeight: 600, fontSize: 16, borderRadius: 8, padding: "12px 0", textAlign: "center", margin: "0 0 32px 0" }}>
+        투자 성공 시 추가 혜택을 받을 수 있습니다
       </div>
       {/* 은행별 계좌 리스트 */}
       <div style={{ display: "flex", flexDirection: "column", gap: 32 }}>
@@ -75,7 +83,7 @@ export default function InvestApplyPage() {
       </div>
       {/* 하단 이전 버튼 */}
       <div style={{ display: "flex", justifyContent: "flex-start", margin: "32px 0 0 0" }}>
-        <button style={{ background: "#ededed", color: "#111", border: "none", borderRadius: 8, padding: "10px 36px", fontWeight: 600, fontSize: 16 }}>이전</button>
+        <button onClick={handlePrevious} style={{ background: "#b2c7a7", color: "#fff", border: "none", borderRadius: 8, padding: "10px 36px", fontWeight: 600, fontSize: 16, cursor: "pointer" }}>이전</button>
       </div>
       {/* 계좌 선택 모달 */}
       {showModal && selectedAccount === null && (
