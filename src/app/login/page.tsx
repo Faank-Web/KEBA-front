@@ -20,6 +20,7 @@ const formatPhoneNumber = (value: string) => {
 export default function LoginPage() {
   const [phoneNumber, setPhoneNumber] = useState("");
   const [password, setPassword] = useState("");
+  const [showPasswordModal, setShowPasswordModal] = useState(false);
   const [error, setError] = useState("");
   const router = useRouter();
 
@@ -28,12 +29,19 @@ export default function LoginPage() {
     setPhoneNumber(formatted);
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    
-    // 테스트용 로그인 정보
+  const handlePhoneNumberSubmit = () => {
+    if (phoneNumber.length >= 12) {
+      setShowPasswordModal(true);
+      setError("");
+    } else {
+      setError("휴대폰 번호를 입력해주세요.");
+    }
+  };
+
+  const handlePasswordSubmit = () => {
+    // 테스트용 로그인 정보 (6자리로 변경)
     const testPhoneNumber = "010-1234-5678";
-    const testPassword = "1234";
+    const testPassword = "123456";
     
     if (phoneNumber === testPhoneNumber && password === testPassword) {
       // 로그인 성공 - 실제로는 서버에서 인증 후 토큰을 저장
@@ -41,8 +49,20 @@ export default function LoginPage() {
       alert("로그인 성공!");
       router.push("/products");
     } else {
-      setError("휴대폰 번호 또는 비밀번호가 올바르지 않습니다.");
+      setError("비밀번호가 올바르지 않습니다.");
+      setPassword("");
     }
+  };
+
+  const handlePasswordChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const value = e.target.value.replace(/[^\d]/g, '').slice(0, 6);
+    setPassword(value);
+  };
+
+  const closePasswordModal = () => {
+    setShowPasswordModal(false);
+    setPassword("");
+    setError("");
   };
 
   return (
@@ -53,28 +73,18 @@ export default function LoginPage() {
       <div style={{ background: "#f8f9fa", border: "1px solid #dee2e6", borderRadius: 6, padding: 12, marginBottom: 20, fontSize: 14, color: "#666" }}>
         <strong>테스트용 로그인 정보:</strong><br />
         휴대폰 번호: 010-1234-5678<br />
-        비밀번호: 1234
+        비밀번호: 123456
       </div>
       
-      <form onSubmit={handleSubmit} style={{ display: "flex", flexDirection: "column", gap: 20 }}>
+      <div style={{ display: "flex", flexDirection: "column", gap: 20 }}>
         <div>
           <label style={{ fontWeight: 500, color: "#111" }}>휴대폰 번호</label>
           <input 
             type="tel" 
-            placeholder="010-1234-5678" 
+            placeholder="휴대폰 번호를 입력해주세요" 
             value={phoneNumber}
             onChange={handlePhoneNumberChange}
             maxLength={13}
-            style={{ width: "100%", padding: 10, borderRadius: 6, border: "1px solid #b2c7a7", fontSize: 16, marginTop: 4, color: "#111" }} 
-          />
-        </div>
-        <div>
-          <label style={{ fontWeight: 500, color: "#111" }}>비밀번호</label>
-          <input 
-            type="password" 
-            placeholder="비밀번호 입력" 
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
             style={{ width: "100%", padding: 10, borderRadius: 6, border: "1px solid #b2c7a7", fontSize: 16, marginTop: 4, color: "#111" }} 
           />
         </div>
@@ -85,13 +95,223 @@ export default function LoginPage() {
           </div>
         )}
         
-        <button type="submit" style={{ background: "#4b5e2e", color: "#fff", border: "none", borderRadius: 6, padding: "12px 0", fontWeight: 700, fontSize: 17, marginTop: 8, letterSpacing: 1 }}>
-          로그인
+        <button 
+          onClick={handlePhoneNumberSubmit}
+          style={{ 
+            background: phoneNumber.length >= 12 ? "#4b5e2e" : "#ccc", 
+            color: "#fff", 
+            border: "none", 
+            borderRadius: 6, 
+            padding: "12px 0", 
+            fontWeight: 700, 
+            fontSize: 17, 
+            marginTop: 8, 
+            letterSpacing: 1,
+            cursor: phoneNumber.length >= 12 ? "pointer" : "not-allowed"
+          }}
+        >
+          다음
         </button>
-      </form>
+      </div>
+      
       <div style={{ textAlign: "center", marginTop: 18 }}>
         <span style={{ color: "#111", fontSize: 15 }}>비밀번호를 잊으셨나요?</span>
       </div>
+
+      {/* 비밀번호 입력 모달 */}
+      {showPasswordModal && (
+        <div style={{
+          position: "fixed",
+          top: 0,
+          left: 0,
+          right: 0,
+          bottom: 0,
+          background: "rgba(0, 0, 0, 0.5)",
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+          zIndex: 1000
+        }} onClick={closePasswordModal}>
+          <div style={{
+            background: "#fff",
+            borderRadius: 16,
+            padding: 32,
+            width: "90%",
+            maxWidth: 400,
+            maxHeight: "80vh",
+            overflow: "auto"
+          }} onClick={(e) => e.stopPropagation()}>
+            
+            {/* 모달 헤더 */}
+            <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: 24 }}>
+              <span style={{ fontSize: 24, fontWeight: 700, color: "#111" }}>비밀번호 6자리 등록</span>
+              <button
+                onClick={closePasswordModal}
+                style={{
+                  background: "none",
+                  border: "none",
+                  fontSize: 24,
+                  color: "#ccc",
+                  cursor: "pointer",
+                  padding: 4
+                }}
+              >
+                ×
+              </button>
+            </div>
+
+            <div style={{ textAlign: "center", marginBottom: 32 }}>
+              <div style={{ fontSize: 16, color: "#666", marginBottom: 16 }}>로그인시 사용할 비밀번호를 입력해주세요</div>
+              
+              {/* 비밀번호 입력 상태 표시 */}
+              <div style={{ display: "flex", justifyContent: "center", gap: 8, marginBottom: 24 }}>
+                {[1, 2, 3, 4, 5, 6].map((num) => (
+                  <div
+                    key={num}
+                    style={{
+                      width: 20,
+                      height: 20,
+                      borderRadius: "50%",
+                      border: password.length === num - 1 ? "2px solid #e74c3c" : "2px solid #ddd",
+                      background: password.length >= num ? "#6b8e23" : "transparent"
+                    }}
+                  />
+                ))}
+              </div>
+
+              {/* 비밀번호 입력 필드 */}
+              <div style={{
+                width: "100%",
+                padding: 16,
+                borderRadius: 8,
+                border: "2px solid #e74c3c",
+                fontSize: 18,
+                textAlign: "center",
+                letterSpacing: "8px",
+                marginBottom: 16,
+                background: "#f8f8f8",
+                minHeight: "60px",
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center"
+              }}>
+                {password.split('').map((char, index) => (
+                  <span key={index} style={{ fontSize: 24, fontWeight: 700, color: "#111" }}>●</span>
+                ))}
+                {password.length < 6 && (
+                  <span style={{ 
+                    width: "2px", 
+                    height: "24px", 
+                    background: "#e74c3c", 
+                    animation: "blink 1s infinite",
+                    marginLeft: "4px"
+                  }} />
+                )}
+              </div>
+            </div>
+
+            {/* 숫자 키패드 */}
+            <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: 12, marginBottom: 24 }}>
+              {[1, 2, 3, 4, 5, 6, 7, 8, 9].map((num) => (
+                <button
+                  key={num}
+                  onClick={() => {
+                    if (password.length < 6) {
+                      setPassword(prev => prev + num.toString());
+                    }
+                  }}
+                  style={{
+                    width: "100%",
+                    height: 60,
+                    border: "1px solid #ddd",
+                    borderRadius: 8,
+                    background: "#fff",
+                    fontSize: 20,
+                    fontWeight: 600,
+                    color: "#111",
+                    cursor: "pointer",
+                    transition: "all 0.2s"
+                  }}
+                  onMouseEnter={(e) => e.currentTarget.style.background = "#f0f0f0"}
+                  onMouseLeave={(e) => e.currentTarget.style.background = "#fff"}
+                >
+                  {num}
+                </button>
+              ))}
+              <button
+                onClick={() => {
+                  if (password.length < 6) {
+                    setPassword(prev => prev + "0");
+                  }
+                }}
+                style={{
+                  width: "100%",
+                  height: 60,
+                  border: "1px solid #ddd",
+                  borderRadius: 8,
+                  background: "#fff",
+                  fontSize: 20,
+                  fontWeight: 600,
+                  color: "#111",
+                  cursor: "pointer",
+                  transition: "all 0.2s"
+                }}
+                onMouseEnter={(e) => e.currentTarget.style.background = "#f0f0f0"}
+                onMouseLeave={(e) => e.currentTarget.style.background = "#fff"}
+              >
+                0
+              </button>
+              <button
+                onClick={() => {
+                  if (password.length > 0) {
+                    setPassword(prev => prev.slice(0, -1));
+                  }
+                }}
+                style={{
+                  width: "100%",
+                  height: 60,
+                  border: "1px solid #ddd",
+                  borderRadius: 8,
+                  background: "#fff",
+                  fontSize: 20,
+                  fontWeight: 600,
+                  color: "#111",
+                  cursor: "pointer",
+                  transition: "all 0.2s"
+                }}
+                onMouseEnter={(e) => e.currentTarget.style.background = "#f0f0f0"}
+                onMouseLeave={(e) => e.currentTarget.style.background = "#fff"}
+              >
+                ←
+              </button>
+            </div>
+
+            <button 
+              onClick={handlePasswordSubmit}
+              style={{ 
+                width: "100%",
+                background: password.length === 6 ? "#6b8e23" : "#ccc", 
+                color: "#fff", 
+                border: "none", 
+                borderRadius: 8, 
+                padding: "16px 0", 
+                fontWeight: 600, 
+                fontSize: 16,
+                cursor: password.length === 6 ? "pointer" : "not-allowed"
+              }}
+            >
+              로그인
+            </button>
+
+            <style jsx>{`
+              @keyframes blink {
+                0%, 50% { opacity: 1; }
+                51%, 100% { opacity: 0; }
+              }
+            `}</style>
+          </div>
+        </div>
+      )}
     </div>
   );
 } 
