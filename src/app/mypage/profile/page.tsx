@@ -179,18 +179,7 @@ export default function MyProfilePage() {
                 <span style={{ fontSize: 16, color: "#666", fontWeight: 500 }}>전화번호</span>
                 <span style={{ fontSize: 16, color: "#111", fontWeight: 600 }}>010 0000 0000</span>
               </div>
-              <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", padding: "16px 0", borderBottom: "1px solid #eee" }}>
-                <span style={{ fontSize: 16, color: "#666", fontWeight: 500 }}>이메일</span>
-                <span style={{ fontSize: 16, color: "#111", fontWeight: 600 }}>keba@example.com</span>
-              </div>
-              <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", padding: "16px 0", borderBottom: "1px solid #eee" }}>
-                <span style={{ fontSize: 16, color: "#666", fontWeight: 500 }}>생년월일</span>
-                <span style={{ fontSize: 16, color: "#111", fontWeight: 600 }}>1990년 01월 01일</span>
-              </div>
-              <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", padding: "16px 0", borderBottom: "1px solid #eee" }}>
-                <span style={{ fontSize: 16, color: "#666", fontWeight: 500 }}>주소</span>
-                <span style={{ fontSize: 16, color: "#111", fontWeight: 600 }}>서울특별시 강남구</span>
-              </div>
+              {/* 이메일, 생년월일 항목 제거됨 */}
               <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", padding: "16px 0", borderBottom: "1px solid #eee" }}>
                 <span style={{ fontSize: 16, color: "#666", fontWeight: 500 }}>가입일</span>
                 <span style={{ fontSize: 16, color: "#111", fontWeight: 600 }}>2024년 01월 01일</span>

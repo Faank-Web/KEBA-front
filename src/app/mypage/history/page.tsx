@@ -23,7 +23,19 @@ export default function MyHistoryPage() {
   const [investList, setInvestList] = useState(INIT_INVEST_LIST);
   const [checked, setChecked] = useState<number[]>([]);
   const [showStatusHelp, setShowStatusHelp] = useState(false);
+  const [sortType, setSortType] = useState<'recent' | 'name' | 'status'>('recent');
   const helpRef = useRef<HTMLDivElement>(null);
+
+  // 정렬 함수
+  const getSortedList = () => {
+    let sorted = [...investList];
+    if (sortType === 'name') {
+      sorted.sort((a, b) => a.name.localeCompare(b.name));
+    } else if (sortType === 'status') {
+      sorted.sort((a, b) => a.status.localeCompare(b.status));
+    } // 'recent'은 원래 순서 유지
+    return sorted;
+  };
 
   const handleCheck = (id: number) => {
     setChecked((prev) =>
@@ -89,7 +101,15 @@ export default function MyHistoryPage() {
       <div style={{ color: "#888", fontSize: 15, marginBottom: 8 }}>총 {investList.length}건</div>
       <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: 8 }}>
         <div />
-        <div style={{ color: "#888", fontSize: 15, cursor: "pointer", userSelect: "none" }}>최근 거래순 ▼</div>
+        <select
+          value={sortType}
+          onChange={e => setSortType(e.target.value as any)}
+          style={{ color: "#888", fontSize: 15, border: "1px solid #e0e0e0", borderRadius: 6, padding: "4px 12px", background: "#fff", cursor: "pointer" }}
+        >
+          <option value="recent">최근 거래순</option>
+          <option value="name">이름순</option>
+          <option value="status">상태순</option>
+        </select>
       </div>
       <table style={{ width: "100%", background: "#fff", borderRadius: 12, boxShadow: "0 2px 8px #e0e0e0", fontSize: 16, color: "#111", borderCollapse: "collapse", marginBottom: 24 }}>
         <thead>
@@ -102,7 +122,7 @@ export default function MyHistoryPage() {
           </tr>
         </thead>
         <tbody>
-          {investList.map((item) => (
+          {getSortedList().map((item) => (
             <tr key={item.id}>
               <td style={{ padding: 14, border: "1px solid #e0e0e0", textAlign: "center" }}>
                 <input type="checkbox" checked={checked.includes(item.id)} onChange={() => handleCheck(item.id)} style={{ width: 18, height: 18 }} />
