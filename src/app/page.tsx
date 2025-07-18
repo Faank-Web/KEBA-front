@@ -61,7 +61,7 @@ export default function HomePage() {
       {/* 상단 메뉴 */}
       <header style={{ height: 80, background: "#fff", borderBottom: "2px solid #b2c7a7", display: "flex", alignItems: "center", padding: "0 40px", fontWeight: 700, fontSize: 20, color: "#111", justifyContent: "space-between" }}>
         <div style={{ display: "flex", alignItems: "center", gap: 32 }}>
-          <Image src="/logo.png" alt="FAANK 로고" width={80} height={80} priority />
+          <Image src="/logo.png" alt="FAANK 로고" width={120} height={120} priority />
           <button onClick={() => scrollToSection("about-section")} style={{ background: "none", border: "none", fontSize: 16, color: "#666", cursor: "pointer", fontWeight: 500 }}>서비스소개</button>
           <button onClick={() => scrollToSection("magazine-section")} style={{ background: "none", border: "none", fontSize: 16, color: "#666", cursor: "pointer", fontWeight: 500 }}>매거진</button>
           <button onClick={() => scrollToSection("notice-section")} style={{ background: "none", border: "none", fontSize: 16, color: "#666", cursor: "pointer", fontWeight: 500 }}>공지사항</button>

@@ -134,41 +134,39 @@ export default function LoginPage() {
         }} onClick={closePasswordModal}>
           <div style={{
             background: "#fff",
-            borderRadius: 16,
-            padding: 20,
-            width: "90%",
-            maxWidth: 340,
-            maxHeight: "60vh",
+            borderRadius: 12,
+            padding: 12,
+            width: "92%",
+            maxWidth: 300,
+            maxHeight: 320,
             overflow: "auto"
           }} onClick={(e) => e.stopPropagation()}>
-            
             {/* 모달 헤더 */}
-            <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: 16 }}>
-              <span style={{ fontSize: 18, fontWeight: 700, color: "#111" }}>비밀번호 6자리 등록</span>
+            <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: 10 }}>
+              <span style={{ fontSize: 15, fontWeight: 700, color: "#111" }}>비밀번호 6자리 등록</span>
               <button
                 onClick={closePasswordModal}
                 style={{
                   background: "none",
                   border: "none",
-                  fontSize: 24,
+                  fontSize: 18,
                   color: "#ccc",
                   cursor: "pointer",
-                  padding: 4
+                  padding: 2
                 }}
               >
                 ×
               </button>
             </div>
-
-            <div style={{ textAlign: "center", marginBottom: 16 }}>
+            <div style={{ textAlign: "center", marginBottom: 10 }}>
               {/* 비밀번호 입력 상태 표시 */}
-              <div style={{ display: "flex", justifyContent: "center", gap: 6, marginBottom: 12 }}>
+              <div style={{ display: "flex", justifyContent: "center", gap: 4, marginBottom: 8 }}>
                 {[1, 2, 3, 4, 5, 6].map((num) => (
                   <div
                     key={num}
                     style={{
-                      width: 20,
-                      height: 20,
+                      width: 15,
+                      height: 15,
                       borderRadius: "50%",
                       border: password.length === num - 1 ? "2px solid #e74c3c" : "2px solid #ddd",
                       background: password.length >= num ? "#6b8e23" : "transparent"
@@ -176,40 +174,38 @@ export default function LoginPage() {
                   />
                 ))}
               </div>
-
               {/* 비밀번호 입력 필드 */}
               <div style={{
                 width: "100%",
-                padding: 10,
-                borderRadius: 8,
+                padding: 6,
+                borderRadius: 6,
                 border: "2px solid #e74c3c",
-                fontSize: 15,
+                fontSize: 13,
                 textAlign: "center",
-                letterSpacing: "5px",
-                marginBottom: 10,
+                letterSpacing: "3px",
+                marginBottom: 6,
                 background: "#f8f8f8",
-                minHeight: "45px",
+                minHeight: "30px",
                 display: "flex",
                 alignItems: "center",
                 justifyContent: "center"
               }}>
                 {password.split('').map((char, index) => (
-                  <span key={index} style={{ fontSize: 18, fontWeight: 700, color: "#111" }}>●</span>
+                  <span key={index} style={{ fontSize: 14, fontWeight: 700, color: "#111" }}>●</span>
                 ))}
                 {password.length < 6 && (
                   <span style={{ 
                     width: "2px", 
-                    height: "18px", 
+                    height: "12px", 
                     background: "#e74c3c", 
                     animation: "blink 1s infinite",
-                    marginLeft: "2px"
+                    marginLeft: "1px"
                   }} />
                 )}
               </div>
             </div>
-
             {/* 숫자 키패드 */}
-            <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: 6, marginBottom: 12 }}>
+            <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: 4, marginBottom: 8 }}>
               {[1, 2, 3, 4, 5, 6, 7, 8, 9].map((num) => (
                 <button
                   key={num}
@@ -220,11 +216,11 @@ export default function LoginPage() {
                   }}
                   style={{
                     width: "100%",
-                    height: 45,
+                    height: 32,
                     border: "1px solid #ddd",
-                    borderRadius: 8,
+                    borderRadius: 6,
                     background: "#fff",
-                    fontSize: 16,
+                    fontSize: 13,
                     fontWeight: 600,
                     color: "#111",
                     cursor: "pointer",
@@ -244,11 +240,11 @@ export default function LoginPage() {
                 }}
                 style={{
                   width: "100%",
-                  height: 45,
+                  height: 32,
                   border: "1px solid #ddd",
-                  borderRadius: 8,
+                  borderRadius: 6,
                   background: "#fff",
-                  fontSize: 16,
+                  fontSize: 13,
                   fontWeight: 600,
                   color: "#111",
                   cursor: "pointer",
@@ -267,11 +263,11 @@ export default function LoginPage() {
                 }}
                 style={{
                   width: "100%",
-                  height: 45,
+                  height: 32,
                   border: "1px solid #ddd",
-                  borderRadius: 8,
+                  borderRadius: 6,
                   background: "#fff",
-                  fontSize: 16,
+                  fontSize: 13,
                   fontWeight: 600,
                   color: "#111",
                   cursor: "pointer",
@@ -283,7 +279,6 @@ export default function LoginPage() {
                 ←
               </button>
             </div>
-
             <button 
               onClick={handlePasswordSubmit}
               style={{ 
@@ -291,16 +286,15 @@ export default function LoginPage() {
                 background: password.length === 6 ? "#6b8e23" : "#ccc", 
                 color: "#fff", 
                 border: "none", 
-                borderRadius: 8, 
-                padding: "10px 0", 
+                borderRadius: 6, 
+                padding: "7px 0", 
                 fontWeight: 600, 
-                fontSize: 15,
+                fontSize: 13,
                 cursor: password.length === 6 ? "pointer" : "not-allowed"
               }}
             >
               로그인
             </button>
-
             <style jsx>{`
               @keyframes blink {
                 0%, 50% { opacity: 1; }

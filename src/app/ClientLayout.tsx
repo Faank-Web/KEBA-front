@@ -37,7 +37,7 @@ export default function ClientLayout({ children }: { children: React.ReactNode }
       <header style={{ height: 80, background: "#fff", borderBottom: "2px solid #b2c7a7", display: "flex", alignItems: "center", padding: "0 40px", fontWeight: 700, fontSize: 20, color: "#111", justifyContent: "space-between" }}>
         <div style={{ display: "flex", alignItems: "center", gap: 32 }}>
           <Link href="/" style={{ display: "flex", alignItems: "center", textDecoration: "none" }}>
-            <Image src="/logo.png" alt="FAANK 로고" width={80} height={80} priority />
+            <Image src="/logo.png" alt="FAANK 로고" width={120} height={120} priority />
           </Link>
           <Link href="/about" style={{ background: "none", border: "none", fontSize: 16, color: "#666", cursor: "pointer", fontWeight: 500, textDecoration: "none" }}>서비스소개</Link>
           <Link href="/magazine" style={{ background: "none", border: "none", fontSize: 16, color: "#666", cursor: "pointer", fontWeight: 500, textDecoration: "none" }}>매거진</Link>
