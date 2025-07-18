@@ -1,5 +1,5 @@
 "use client";
-import React from "react";
+import React, { useState } from "react";
 import Image from "next/image";
 
 const scrollToSection = (id: string) => {
@@ -9,7 +9,44 @@ const scrollToSection = (id: string) => {
   }
 };
 
+// 배너 데이터
+const BANNER_DATA = [
+  { id: 1, title: "홍보영상 및 이벤트 이미지 1", image: "/banner1.jpg" },
+  { id: 2, title: "홍보영상 및 이벤트 이미지 2", image: "/banner2.jpg" },
+  { id: 3, title: "홍보영상 및 이벤트 이미지 3", image: "/banner3.jpg" },
+];
+
+// 경매 TOP10 데이터
+const AUCTION_DATA = [
+  { id: 1, farm: "○○○농장", image: "/farm1.jpg" },
+  { id: 2, farm: "△△△농장", image: "/farm2.jpg" },
+  { id: 3, farm: "□□□농장", image: "/farm3.jpg" },
+  { id: 4, farm: "◇◇◇농장", image: "/farm4.jpg" },
+  { id: 5, farm: "○○○농장", image: "/farm5.jpg" },
+];
+
 export default function HomePage() {
+  const [currentBanner, setCurrentBanner] = useState(0);
+  const [currentAuction, setCurrentAuction] = useState(0);
+
+  // 배너 슬라이더 함수들
+  const nextBanner = () => {
+    setCurrentBanner((prev) => (prev + 1) % BANNER_DATA.length);
+  };
+
+  const prevBanner = () => {
+    setCurrentBanner((prev) => (prev - 1 + BANNER_DATA.length) % BANNER_DATA.length);
+  };
+
+  // 경매 캐러셀 함수들
+  const nextAuction = () => {
+    setCurrentAuction((prev) => (prev + 1) % AUCTION_DATA.length);
+  };
+
+  const prevAuction = () => {
+    setCurrentAuction((prev) => (prev - 1 + AUCTION_DATA.length) % AUCTION_DATA.length);
+  };
+
   return (
     <>
       {/* 상단 메뉴 */}
@@ -27,10 +64,59 @@ export default function HomePage() {
 
       <div style={{ maxWidth: 1100, margin: "0 auto", padding: "0 24px", color: "#111" }}>
         {/* 홍보영상 및 이벤트 이미지 배너 */}
-        <div style={{ background: "#f8f8f8", borderRadius: 12, padding: "60px 40px", marginBottom: 40, position: "relative", display: "flex", alignItems: "center", justifyContent: "center" }}>
-          <div style={{ fontSize: 24, fontWeight: 700, color: "#666" }}>홍보영상 및 이벤트 이미지</div>
-          <div style={{ position: "absolute", left: 20, top: "50%", transform: "translateY(-50%)", fontSize: 24, color: "#ccc", cursor: "pointer" }}>‹</div>
-          <div style={{ position: "absolute", right: 20, top: "50%", transform: "translateY(-50%)", fontSize: 24, color: "#ccc", cursor: "pointer" }}>›</div>
+        <div style={{ background: "#f8f8f8", borderRadius: 12, padding: "60px 40px", marginBottom: 40, position: "relative", display: "flex", alignItems: "center", justifyContent: "center", overflow: "hidden" }}>
+          <div style={{ 
+            display: "flex", 
+            transform: `translateX(-${currentBanner * 100}%)`, 
+            transition: "transform 0.5s ease-in-out",
+            width: `${BANNER_DATA.length * 100}%`
+          }}>
+            {BANNER_DATA.map((banner, index) => (
+              <div key={banner.id} style={{ 
+                width: `${100 / BANNER_DATA.length}%`, 
+                display: "flex", 
+                alignItems: "center", 
+                justifyContent: "center",
+                flexShrink: 0
+              }}>
+                <div style={{ fontSize: 24, fontWeight: 700, color: "#666" }}>
+                  {banner.title}
+                </div>
+              </div>
+            ))}
+          </div>
+          
+          {/* 배너 인디케이터 */}
+          <div style={{ position: "absolute", bottom: 20, left: "50%", transform: "translateX(-50%)", display: "flex", gap: 8 }}>
+            {BANNER_DATA.map((_, index) => (
+              <button
+                key={index}
+                onClick={() => setCurrentBanner(index)}
+                style={{
+                  width: 12,
+                  height: 12,
+                  borderRadius: "50%",
+                  border: "none",
+                  background: index === currentBanner ? "#6b8e23" : "#ccc",
+                  cursor: "pointer",
+                  transition: "background 0.3s"
+                }}
+              />
+            ))}
+          </div>
+          
+          <button 
+            onClick={prevBanner}
+            style={{ position: "absolute", left: 20, top: "50%", transform: "translateY(-50%)", fontSize: 24, color: "#ccc", cursor: "pointer", background: "none", border: "none", padding: 8 }}
+          >
+            ‹
+          </button>
+          <button 
+            onClick={nextBanner}
+            style={{ position: "absolute", right: 20, top: "50%", transform: "translateY(-50%)", fontSize: 24, color: "#ccc", cursor: "pointer", background: "none", border: "none", padding: 8 }}
+          >
+            ›
+          </button>
         </div>
 
         {/* 3개 콘텐츠 블록 */}
@@ -95,19 +181,61 @@ export default function HomePage() {
           <h2 style={{ fontSize: 28, fontWeight: 700, marginBottom: 32, textAlign: "center" }}>경매 TOP10</h2>
           
           {/* 상단 캐러셀 */}
-          <div style={{ background: "#f8f8f8", borderRadius: 12, padding: "40px 20px", marginBottom: 32, position: "relative" }}>
-            <div style={{ display: "flex", justifyContent: "center", alignItems: "center", gap: 40 }}>
-              {[1, 2, 3, 4, 5].map((item) => (
-                <div key={item} style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: 12 }}>
+          <div style={{ background: "#f8f8f8", borderRadius: 12, padding: "40px 20px", marginBottom: 32, position: "relative", overflow: "hidden" }}>
+            <div style={{ 
+              display: "flex", 
+              transform: `translateX(-${currentAuction * 200}px)`, 
+              transition: "transform 0.5s ease-in-out",
+              gap: 40
+            }}>
+              {AUCTION_DATA.map((item) => (
+                <div key={item.id} style={{ 
+                  display: "flex", 
+                  flexDirection: "column", 
+                  alignItems: "center", 
+                  gap: 12,
+                  minWidth: 160,
+                  flexShrink: 0
+                }}>
                   <div style={{ width: 80, height: 80, background: "#e0e0e0", borderRadius: "50%", display: "flex", alignItems: "center", justifyContent: "center", fontSize: 24, color: "#999" }}>
                     🐄
                   </div>
-                  <div style={{ fontSize: 16, fontWeight: 600, color: "#666" }}>○○○농장</div>
+                  <div style={{ fontSize: 16, fontWeight: 600, color: "#666" }}>{item.farm}</div>
                 </div>
               ))}
             </div>
-            <div style={{ position: "absolute", left: 20, top: "50%", transform: "translateY(-50%)", fontSize: 24, color: "#ccc", cursor: "pointer" }}>‹</div>
-            <div style={{ position: "absolute", right: 20, top: "50%", transform: "translateY(-50%)", fontSize: 24, color: "#ccc", cursor: "pointer" }}>›</div>
+            
+            {/* 경매 캐러셀 인디케이터 */}
+            <div style={{ position: "absolute", bottom: 20, left: "50%", transform: "translateX(-50%)", display: "flex", gap: 8 }}>
+              {[0, 1, 2, 3, 4].map((index) => (
+                <button
+                  key={index}
+                  onClick={() => setCurrentAuction(index)}
+                  style={{
+                    width: 8,
+                    height: 8,
+                    borderRadius: "50%",
+                    border: "none",
+                    background: index === currentAuction ? "#6b8e23" : "#ccc",
+                    cursor: "pointer",
+                    transition: "background 0.3s"
+                  }}
+                />
+              ))}
+            </div>
+            
+            <button 
+              onClick={prevAuction}
+              style={{ position: "absolute", left: 20, top: "50%", transform: "translateY(-50%)", fontSize: 24, color: "#ccc", cursor: "pointer", background: "none", border: "none", padding: 8 }}
+            >
+              ‹
+            </button>
+            <button 
+              onClick={nextAuction}
+              style={{ position: "absolute", right: 20, top: "50%", transform: "translateY(-50%)", fontSize: 24, color: "#ccc", cursor: "pointer", background: "none", border: "none", padding: 8 }}
+            >
+              ›
+            </button>
           </div>
 
           {/* 하단 상세 데이터 테이블 */}
