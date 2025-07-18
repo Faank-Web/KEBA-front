@@ -78,12 +78,13 @@ export default function ClientLayout({ children }: { children: React.ReactNode }
       </div>
       {/* 피그마 스타일 푸터 */}
       <footer style={{ background: "#ededed", borderTop: "1px solid #e0e0e0", padding: "40px 0 0 0", marginTop: 40, color: "#111" }}>
-        <div style={{ maxWidth: 1200, margin: "0 auto", padding: "0 32px" }}>
+        <div style={{ maxWidth: 1100, margin: "0 auto", padding: "0 32px" }}>
           <div style={{ display: "flex", justifyContent: "space-between", gap: 32, flexWrap: "wrap", color: "#111" }}>
             {/* 서비스 */}
             <div>
               <div style={{ fontWeight: 700, fontSize: 18, marginBottom: 16, color: "#111" }}>서비스</div>
               <div style={{ color: "#111", lineHeight: 2 }}>
+                <div>투자하기</div>
                 <div>서비스 소개</div>
                 <div>매거진</div>
                 <div>공지사항</div>
@@ -111,28 +112,18 @@ export default function ClientLayout({ children }: { children: React.ReactNode }
                 <div>마케팅 수신동의</div>
               </div>
             </div>
-            {/* 앱 다운로드 */}
-            <div>
-              <div style={{ fontWeight: 700, fontSize: 18, marginBottom: 16, color: "#111" }}>앱 다운로드</div>
-              <div style={{ display: "flex", gap: 12, marginTop: 8 }}>
-                <button style={{ background: "#fff", border: "1px solid #ccc", borderRadius: 8, padding: "8px 18px", fontWeight: 600, fontSize: 15, cursor: "pointer", color: "#111" }}>App store</button>
-                <button style={{ background: "#fff", border: "1px solid #ccc", borderRadius: 8, padding: "8px 18px", fontWeight: 600, fontSize: 15, cursor: "pointer", color: "#111" }}>Google Play</button>
-              </div>
-            </div>
           </div>
           {/* 하단 회사 정보 */}
           <div style={{ borderTop: "1px solid #ccc", marginTop: 32, padding: "24px 0 12px 0", color: "#111", fontSize: 14, lineHeight: 1.7 }}>
             <div style={{ display: "flex", flexWrap: "wrap", gap: 32, justifyContent: "space-between" }}>
               <div>
-                (주)한국어스퍼트블럭협회 | 대표 최호원<br />
+                (주)한국엑스퍼트브랜드협회 | 대표: 최윤희<br />
                 주소: 경기도 하남시 미사강변한강로 279 129, 130호<br />
-                사업자등록번호: 737-87-02891<br />
-                법인 등록번호: 00000-0000000<br />
-                통신판매업 신고번호: 제 2025-가나다-0000 호
+                사업자등록번호 737-87-02891<br />
               </div>
               <div>
-                전화: 010-4747-2102 (평일 10시 ~ 17시)<br />
-                Email(문의): rassom06@naver.com
+                메일: rassom@naver.com | 번호: 010. 7586. 2102<br />
+                팩스: 0504-167-2102<br />
               </div>
             </div>
           </div>
