@@ -1,14 +1,30 @@
 "use client";
-import React from "react";
+import React, { useState, useEffect } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
+
+const scrollToSection = (id: string) => {
+  if (typeof window !== "undefined") {
+    const el = document.getElementById(id);
+    if (el) el.scrollIntoView({ behavior: "smooth" });
+  }
+};
 
 export default function ClientLayout({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
   const isMypage = pathname.startsWith("/mypage");
   const isMain = pathname === "/";
   const isProducts = pathname === "/products" || pathname.startsWith("/products/");
+  
+  // 로그인 상태 (localStorage에서 가져오기)
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+
+  useEffect(() => {
+    // localStorage에서 로그인 상태 확인
+    const loginStatus = localStorage.getItem("isLoggedIn");
+    setIsLoggedIn(loginStatus === "true");
+  }, []);
 
   // 메인페이지에서는 헤더/푸터/사이드바를 렌더링하지 않음
   if (isMain) {
@@ -17,25 +33,35 @@ export default function ClientLayout({ children }: { children: React.ReactNode }
 
   return (
     <>
-      {/* 상단 네비게이션 (메인페이지가 아닐 때만) */}
-      <header style={{ height: 80, background: "#fff", borderBottom: "1px solid #e0e0e0", display: "flex", alignItems: "center", padding: "0 40px", fontWeight: 700, fontSize: 20, color: "#6b8e23", justifyContent: "space-between" }}>
-        <div style={{ display: "flex", alignItems: "center", gap: 16 }}>
+      {/* 상단 메뉴 */}
+      <header style={{ height: 80, background: "#fff", borderBottom: "2px solid #b2c7a7", display: "flex", alignItems: "center", padding: "0 40px", fontWeight: 700, fontSize: 20, color: "#111", justifyContent: "space-between" }}>
+        <div style={{ display: "flex", alignItems: "center", gap: 32 }}>
           <Link href="/" style={{ display: "flex", alignItems: "center", textDecoration: "none" }}>
             <Image src="/logo.png" alt="FAANK 로고" width={80} height={80} priority />
           </Link>
+          <Link href="/about" style={{ background: "none", border: "none", fontSize: 16, color: "#666", cursor: "pointer", fontWeight: 500, textDecoration: "none" }}>서비스소개</Link>
+          <Link href="/magazine" style={{ background: "none", border: "none", fontSize: 16, color: "#666", cursor: "pointer", fontWeight: 500, textDecoration: "none" }}>매거진</Link>
+          <Link href="/notice" style={{ background: "none", border: "none", fontSize: 16, color: "#666", cursor: "pointer", fontWeight: 500, textDecoration: "none" }}>공지사항</Link>
         </div>
-        <nav style={{ display: "flex", gap: 32, fontWeight: 500, fontSize: 17, alignItems: "center" }}>
-          <Link href="/products">투자상품</Link>
-          <Link href="/mypage">마이페이지</Link>
-          {!isProducts && (
-            <Link href="/products" style={{ background: "#b2c7a7", color: "#fff", borderRadius: 6, padding: "8px 18px", fontWeight: 700, fontSize: 16, marginLeft: 16, textDecoration: "none" }}>투자하기</Link>
+        <div style={{ display: "flex", alignItems: "center", gap: 20 }}>
+          {isLoggedIn ? (
+            <>
+              <a href="/products" style={{ background: "#6b8e23", color: "#fff", borderRadius: 6, padding: "8px 18px", fontWeight: 700, fontSize: 16, textDecoration: "none" }}>투자하기</a>
+              <a href="/mypage" style={{ color: "#666", fontWeight: 500, fontSize: 16, textDecoration: "none" }}>마이페이지</a>
+            </>
+          ) : (
+            <>
+              <a href="/login" style={{ color: "#666", fontWeight: 500, fontSize: 16, textDecoration: "none" }}>로그인</a>
+              <span style={{ color: "#666", fontSize: 16 }}>/</span>
+              <a href="/signup" style={{ color: "#666", fontWeight: 500, fontSize: 16, textDecoration: "none" }}>회원가입</a>
+            </>
           )}
-        </nav>
+        </div>
       </header>
       {/* 전체 레이아웃 */}
       <div style={{ display: "flex", minHeight: "calc(100vh - 120px)" }}>
         {/* 마이페이지에서만 사이드바 노출 */}
-        {isMypage ? null : (
+        {isMypage && (
           <aside style={{ width: 180, background: "#e6f4d7", padding: "32px 0 0 0", borderRight: "1px solid #e0e0e0" }}>
             <nav style={{ display: "flex", flexDirection: "column", gap: 20, fontSize: 16, fontWeight: 500, color: "#4b5e2e", paddingLeft: 24 }}>
               <Link href="/signup">회원가입</Link>

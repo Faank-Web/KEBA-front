@@ -1,26 +1,63 @@
-import React from "react";
+"use client";
+import React, { useState, useEffect } from "react";
 import Link from "next/link";
 
 export default function ProductsPage() {
+  const [sortBy, setSortBy] = useState("latest");
+  
+  // 로그인 상태 (localStorage에서 가져오기)
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+
+  useEffect(() => {
+    // localStorage에서 로그인 상태 확인
+    const loginStatus = localStorage.getItem("isLoggedIn");
+    setIsLoggedIn(loginStatus === "true");
+  }, []);
+
+  const handleInvestmentClick = () => {
+    if (!isLoggedIn) {
+      // 로그인하지 않은 경우 로그인 페이지로 이동
+      window.location.href = "/login";
+      return;
+    }
+    // 로그인한 경우 투자 상세 페이지로 이동
+    window.location.href = "/products/1";
+  };
+
   return (
     <div style={{ maxWidth: 1100, margin: "40px auto", padding: "0 24px", color: "#111", background: "#fff", borderRadius: 16, boxShadow: "0 2px 12px #e0e0e0" }}>
-      {/* 상단 타이틀 및 네비 */}
-      {/* <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", padding: "32px 0 0 0" }}>
-        <div style={{ fontSize: 18, color: "#bdbdbd", fontWeight: 500 }}>투자시스템 - 투자상품 목록</div>
-        <div style={{ display: "flex", alignItems: "center", gap: 12 }}>
-          <button style={{ background: "#e6f4d7", color: "#4b5e2e", border: "none", borderRadius: 6, padding: "8px 18px", fontWeight: 600, fontSize: 15 }}>투자 가이드</button>
-          <button style={{ background: "#b2c7a7", color: "#fff", border: "none", borderRadius: 6, padding: "8px 18px", fontWeight: 700, fontSize: 15 }}>투자하기</button>
+      {/* 카테고리 타이틀 및 정렬 옵션 */}
+      <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", margin: "32px 0 16px 0" }}>
+        <div style={{ display: "flex", alignItems: "center", gap: 10, fontSize: 22, fontWeight: 700, color: "#111" }}>
+          <span style={{ color: "#6b8e23", fontSize: 28 }}>✔</span>
+          농수산물 투자 상품
         </div>
-      </div> */}
-      {/* 카테고리 타이틀 */}
-      <div style={{ display: "flex", alignItems: "center", gap: 10, margin: "32px 0 16px 0", fontSize: 22, fontWeight: 700, color: "#111" }}>
-        <span style={{ color: "#6b8e23", fontSize: 28 }}>✔</span>
-        농수산물 투자 상품
+        <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
+          <span style={{ fontSize: 16, color: "#666", fontWeight: 500 }}>정렬:</span>
+          <select 
+            value={sortBy} 
+            onChange={(e) => setSortBy(e.target.value)}
+            style={{ 
+              padding: "8px 12px", 
+              borderRadius: 6, 
+              border: "1px solid #e0e0e0", 
+              fontSize: 16, 
+              color: "#111", 
+              background: "#fff",
+              cursor: "pointer"
+            }}
+          >
+            <option value="latest">최신순</option>
+            <option value="oldest">오래된순</option>
+            <option value="achievement">투자달성순</option>
+          </select>
+        </div>
       </div>
+      
       {/* 상품 카드 리스트 (피그마 스타일) */}
       <div style={{ display: "flex", gap: 24, marginBottom: 24 }}>
         {/* 첫번째 카드 - 강조 */}
-        <Link href="/products/1" style={{ flex: 1, textDecoration: "none" }}>
+        <div style={{ flex: 1, textDecoration: "none" }}>
           <div style={{ background: "#e6f4d7", borderRadius: 16, boxShadow: "0 2px 8px #b2c7a7", padding: 32, display: "flex", flexDirection: "column", gap: 16, minWidth: 260, position: "relative", cursor: "pointer" }}>
             <div style={{ position: "absolute", top: 20, left: 20, background: "#fff7e6", color: "#ff6600", borderRadius: 8, padding: "4px 12px", fontWeight: 700, fontSize: 15, display: "flex", alignItems: "center", gap: 6 }}>
               <span style={{ fontSize: 18 }}>🔥</span> 실시간 인기 투자 상품
@@ -32,9 +69,24 @@ export default function ProductsPage() {
               <div style={{ color: "#bdbdbd", fontSize: 15 }}>|</div>
               <div style={{ color: "#6b8e23", fontWeight: 700, fontSize: 15 }}>2025.07.14</div>
             </div>
-            <button style={{ background: "#b2c7a7", color: "#fff", border: "none", borderRadius: 6, padding: "10px 0", fontWeight: 700, fontSize: 16, marginTop: 8 }}>투자하기</button>
+            <button 
+              onClick={handleInvestmentClick}
+              style={{ 
+                background: isLoggedIn ? "#b2c7a7" : "#ff6b6b", 
+                color: "#fff", 
+                border: "none", 
+                borderRadius: 6, 
+                padding: "10px 0", 
+                fontWeight: 700, 
+                fontSize: 16, 
+                marginTop: 8,
+                cursor: "pointer"
+              }}
+            >
+              {isLoggedIn ? "투자하기" : "로그인 후 투자하기"}
+            </button>
           </div>
-        </Link>
+        </div>
         {/* 두번째/세번째 카드 - 마감 */}
         <div style={{ flex: 1, background: "#ededed", borderRadius: 16, boxShadow: "0 2px 8px #e0e0e0", padding: 32, display: "flex", flexDirection: "column", gap: 16, minWidth: 260, alignItems: "center", justifyContent: "center", fontWeight: 700, fontSize: 28, color: "#111" }}>
           231% 투자 달성
