@@ -125,53 +125,44 @@ export default function ClientLayout({ children }: { children: React.ReactNode }
         </main>
       </div>
       {/* 피그마 스타일 푸터 */}
-      <footer style={{ background: "linear-gradient(90deg, #e6f4d7 0%, #b2c7a7 100%)", borderTop: "none", borderRadius: "0 0 32px 32px", boxShadow: "0 -4px 24px #b2c7a7", padding: "56px 0 0 0", marginTop: 56, color: "#222" }}>
-        <div style={{ maxWidth: 1100, margin: "0 auto", padding: "0 32px" }}>
-          <div style={{ display: "flex", justifyContent: "space-between", gap: 48, flexWrap: "wrap", color: "#222" }}>
+      <footer style={{ background: "linear-gradient(90deg, #e6f4d7 0%, #b2c7a7 100%)", borderTop: "none", borderRadius: "0 0 20px 20px", boxShadow: "0 -2px 12px #b2c7a7", padding: "28px 0 0 0", marginTop: 36, color: "#222" }}>
+        <div style={{ maxWidth: 1100, margin: "0 auto", padding: "0 20px" }}>
+          <div style={{ display: "flex", justifyContent: "space-between", gap: 24, flexWrap: "wrap", color: "#222", fontSize: 14, fontWeight: 500 }}>
             {/* 서비스 */}
             <div>
-              <div style={{ fontWeight: 900, fontSize: 20, marginBottom: 18, color: "#4b5e2e", letterSpacing: 0.5 }}>서비스</div>
-              <div style={{ color: "#222", lineHeight: 2, fontWeight: 500 }}>
+              <div style={{ fontWeight: 800, fontSize: 15, marginBottom: 10, color: "#4b5e2e", letterSpacing: 0.2 }}>서비스</div>
+              <div style={{ color: "#222", lineHeight: 1.7 }}>
                 <div>투자하기</div>
-                <div>서비스 소개</div>
-                <div>매거진</div>
                 <div>공지사항</div>
-                <div>투자가이드</div>
                 <div>고객센터</div>
-                <div>토큰증권 발행내역</div>
               </div>
             </div>
             {/* 문의 */}
             <div>
-              <div style={{ fontWeight: 900, fontSize: 20, marginBottom: 18, color: "#4b5e2e", letterSpacing: 0.5 }}>문의</div>
-              <div style={{ color: "#222", lineHeight: 2, fontWeight: 500 }}>
+              <div style={{ fontWeight: 800, fontSize: 15, marginBottom: 10, color: "#4b5e2e", letterSpacing: 0.2 }}>문의</div>
+              <div style={{ color: "#222", lineHeight: 1.7 }}>
                 <div>사업제휴 문의</div>
-                <div>농장입점 문의</div>
                 <div>기관투자 문의</div>
               </div>
             </div>
             {/* 약관 */}
             <div>
-              <div style={{ fontWeight: 900, fontSize: 20, marginBottom: 18, color: "#4b5e2e", letterSpacing: 0.5 }}>약관</div>
-              <div style={{ color: "#222", lineHeight: 2, fontWeight: 500 }}>
-                <div>서비스 이용약관</div>
-                <div>추심이체 거래약관</div>
+              <div style={{ fontWeight: 800, fontSize: 15, marginBottom: 10, color: "#4b5e2e", letterSpacing: 0.2 }}>약관</div>
+              <div style={{ color: "#222", lineHeight: 1.7 }}>
+                <div>이용약관</div>
                 <div>개인정보 처리방침</div>
-                <div>마케팅 수신동의</div>
               </div>
             </div>
           </div>
           {/* 하단 회사 정보 */}
-          <div style={{ borderTop: "1.5px solid #b2c7a7", marginTop: 40, padding: "28px 0 16px 0", color: "#4b5e2e", fontSize: 15, lineHeight: 1.8, fontWeight: 500 }}>
-            <div style={{ display: "flex", flexWrap: "wrap", gap: 40, justifyContent: "space-between" }}>
+          <div style={{ borderTop: "1px solid #b2c7a7", marginTop: 18, padding: "12px 0 8px 0", color: "#4b5e2e", fontSize: 12, lineHeight: 1.6, fontWeight: 500 }}>
+            <div style={{ display: "flex", flexWrap: "wrap", gap: 18, justifyContent: "space-between" }}>
               <div>
                 (주)한국엑스퍼트브랜드협회 | 대표: 최윤희<br />
-                주소: 경기도 하남시 미사강변한강로 279 129, 130호<br />
                 사업자등록번호 737-87-02891<br />
               </div>
               <div>
                 메일: rassom@naver.com | 번호: 010. 7586. 2102<br />
-                팩스: 0504-167-2102<br />
               </div>
             </div>
           </div>
