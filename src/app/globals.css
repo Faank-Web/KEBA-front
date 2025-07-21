@@ -24,3 +24,106 @@ body {
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
 }
+
+/* 반응형 레이아웃 - 모바일/태블릿/데스크탑 */
+@media (max-width: 1024px) {
+  body {
+    font-size: 15px;
+  }
+  .main-container, .mypage-main, .mypage-card, .mypage-section, .footer-container {
+    max-width: 98vw !important;
+    padding-left: 8px !important;
+    padding-right: 8px !important;
+  }
+  .desktop-nav {
+    display: none !important;
+  }
+  .mobile-menu-btn {
+    display: block !important;
+  }
+}
+@media (min-width: 1025px) {
+  .desktop-nav {
+    display: flex !important;
+  }
+  .mobile-menu-btn {
+    display: none !important;
+  }
+}
+@media (max-width: 768px) {
+  .main-container, .mypage-main, .mypage-card, .mypage-section, .footer-container {
+    padding-left: 2vw !important;
+    padding-right: 2vw !important;
+    border-radius: 10px !important;
+  }
+  .mypage-card, .mypage-section {
+    padding: 18px !important;
+  }
+  .footer-container {
+    flex-direction: column !important;
+    gap: 8px !important;
+    font-size: 13px !important;
+  }
+  .footer-container > div {
+    margin-bottom: 6px !important;
+  }
+  .sidebar {
+    width: 100vw !important;
+    min-width: 0 !important;
+    border-radius: 0 0 18px 18px !important;
+    box-shadow: none !important;
+    padding: 18px 0 0 0 !important;
+    font-size: 16px !important;
+  }
+}
+@media (max-width: 480px) {
+  body {
+    font-size: 13px;
+  }
+  .main-container, .mypage-main, .mypage-card, .mypage-section {
+    padding: 6px !important;
+    border-radius: 6px !important;
+  }
+  .footer-container {
+    font-size: 11px !important;
+    padding: 0 2vw !important;
+  }
+  .sidebar {
+    font-size: 14px !important;
+    padding: 10px 0 0 0 !important;
+  }
+}
+
+/* 메인페이지 본문 카드/섹션 반응형 */
+@media (max-width: 1024px) {
+  .main-card-list {
+    flex-direction: column !important;
+    gap: 16px !important;
+  }
+  .main-card-list > div {
+    min-width: 0 !important;
+    width: 100% !important;
+    box-sizing: border-box !important;
+  }
+}
+@media (max-width: 768px) {
+  .main-card-list {
+    flex-direction: column !important;
+    gap: 10px !important;
+  }
+  .main-card-list > div {
+    min-width: 0 !important;
+    width: 100% !important;
+    padding: 12px !important;
+    font-size: 15px !important;
+  }
+}
+@media (max-width: 480px) {
+  .main-card-list {
+    gap: 6px !important;
+  }
+  .main-card-list > div {
+    padding: 6px !important;
+    font-size: 13px !important;
+  }
+}

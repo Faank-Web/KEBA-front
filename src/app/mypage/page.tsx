@@ -3,9 +3,9 @@ import React from "react";
 
 export default function MyPageMain() {
   return (
-    <div style={{ width: "100%", background: "#f7f9fa", borderRadius: 24, boxShadow: "0 4px 32px #e0e6ed", padding: "36px 24px 48px 24px", minHeight: 600 }}>
+    <div className="mypage-main" style={{ width: "100%", background: "#f7f9fa", borderRadius: 24, boxShadow: "0 4px 32px #e0e6ed", padding: "36px 24px 48px 24px", minHeight: 600 }}>
       <div style={{ fontSize: 26, fontWeight: 800, color: "#222", marginBottom: 32, letterSpacing: 1 }}> 마이페이지 대시보드</div>
-      <div style={{ display: "flex", gap: 32, marginBottom: 48 }}>
+      <div className="mypage-card-list" style={{ display: "flex", flexWrap: "wrap", gap: 32, marginBottom: 48 }}>
         {/* 예상 수익 카드 */}
         <div style={{ flex: 1, background: "linear-gradient(135deg, #e6f4d7 0%, #b2c7a7 100%)", borderRadius: 18, boxShadow: "0 2px 12px #e0e0e0", padding: 36, color: "#222", display: "flex", flexDirection: "column", alignItems: "flex-start", minWidth: 220 }}>
           <div style={{ fontWeight: 800, fontSize: 22, marginBottom: 16, color: "#6b8e23" }}> 예상 수익</div>

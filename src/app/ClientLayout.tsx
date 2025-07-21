@@ -27,15 +27,16 @@ export default function ClientLayout({ children }: { children: React.ReactNode }
   const isMypage = pathname.startsWith("/mypage");
   const isMain = pathname === "/";
   const isProducts = pathname === "/products" || pathname.startsWith("/products/");
-  
-  // 로그인 상태 (localStorage에서 가져오기)
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [menuOpen, setMenuOpen] = useState(false);
 
   useEffect(() => {
-    // localStorage에서 로그인 상태 확인
     const loginStatus = localStorage.getItem("isLoggedIn");
     setIsLoggedIn(loginStatus === "true");
   }, []);
+
+  // 모바일 메뉴 닫기
+  const closeMenu = () => setMenuOpen(false);
 
   // 메인페이지에서는 헤더/푸터/사이드바를 렌더링하지 않음
   if (isMain) {
@@ -45,16 +46,18 @@ export default function ClientLayout({ children }: { children: React.ReactNode }
   return (
     <>
       {/* 상단 메뉴 */}
-      <header style={{ height: 80, background: "#fff", borderBottom: "2px solid #b2c7a7", display: "flex", alignItems: "center", padding: "0 40px", fontWeight: 700, fontSize: 20, color: "#111", justifyContent: "space-between" }}>
+      <header style={{ height: 80, background: "#fff", borderBottom: "2px solid #b2c7a7", display: "flex", alignItems: "center", padding: "0 40px", fontWeight: 700, fontSize: 20, color: "#111", justifyContent: "space-between", position: "relative", zIndex: 100 }}>
+        {/* 로고 */}
         <div style={{ display: "flex", alignItems: "center", gap: 32 }}>
           <Link href="/" style={{ display: "flex", alignItems: "center", textDecoration: "none" }}>
             <Image src="/logo.png" alt="FAANK 로고" width={120} height={120} priority />
           </Link>
+        </div>
+        {/* 데스크탑 메뉴 */}
+        <nav className="desktop-nav" style={{ display: "flex", alignItems: "center", gap: 32 }}>
           <button onClick={() => goToMainAndScroll('about-section', isMain)} style={{ background: "none", border: "none", fontSize: 16, color: "#666", cursor: "pointer", fontWeight: 500 }}>서비스소개</button>
           <button onClick={() => goToMainAndScroll('magazine-section', isMain)} style={{ background: "none", border: "none", fontSize: 16, color: "#666", cursor: "pointer", fontWeight: 500 }}>매거진</button>
           <button onClick={() => goToMainAndScroll('notice-section', isMain)} style={{ background: "none", border: "none", fontSize: 16, color: "#666", cursor: "pointer", fontWeight: 500 }}>공지사항</button>
-        </div>
-        <div style={{ display: "flex", alignItems: "center", gap: 20 }}>
           {isLoggedIn ? (
             <>
               <a href="/products" style={{ background: "#6b8e23", color: "#fff", borderRadius: 6, padding: "8px 18px", fontWeight: 700, fontSize: 16, textDecoration: "none" }}>투자하기</a>
@@ -67,7 +70,36 @@ export default function ClientLayout({ children }: { children: React.ReactNode }
               <a href="/signup" style={{ color: "#666", fontWeight: 500, fontSize: 16, textDecoration: "none" }}>회원가입</a>
             </>
           )}
-        </div>
+        </nav>
+        {/* 모바일 햄버거 메뉴 버튼 */}
+        <button className="mobile-menu-btn" style={{ display: "none", background: "none", border: "none", fontSize: 32, color: "#6b8e23", cursor: "pointer", zIndex: 101 }} onClick={() => setMenuOpen(true)} aria-label="메뉴 열기">
+          ☰
+        </button>
+        {/* 모바일 오버레이 메뉴 */}
+        {menuOpen && (
+          <div style={{ position: "fixed", top: 0, left: 0, width: "100vw", height: "100vh", background: "rgba(0,0,0,0.35)", zIndex: 2000, display: "flex", flexDirection: "column" }} onClick={closeMenu}>
+            <div style={{ background: "#fff", borderBottom: "2px solid #b2c7a7", padding: "24px 0 16px 32px", display: "flex", alignItems: "center", justifyContent: "space-between" }}>
+              <Image src="/logo.png" alt="FAANK 로고" width={90} height={90} priority />
+              <button onClick={closeMenu} style={{ background: "none", border: "none", fontSize: 32, color: "#b2c7a7", cursor: "pointer", marginRight: 24 }} aria-label="메뉴 닫기">×</button>
+            </div>
+            <nav style={{ display: "flex", flexDirection: "column", gap: 24, padding: "32px 0 0 32px", fontSize: 20, fontWeight: 700, color: "#4b5e2e" }} onClick={e => e.stopPropagation()}>
+              <button onClick={() => { goToMainAndScroll('about-section', isMain); closeMenu(); }} style={{ background: "none", border: "none", color: "#4b5e2e", fontWeight: 700, fontSize: 20, textAlign: "left", cursor: "pointer" }}>서비스소개</button>
+              <button onClick={() => { goToMainAndScroll('magazine-section', isMain); closeMenu(); }} style={{ background: "none", border: "none", color: "#4b5e2e", fontWeight: 700, fontSize: 20, textAlign: "left", cursor: "pointer" }}>매거진</button>
+              <button onClick={() => { goToMainAndScroll('notice-section', isMain); closeMenu(); }} style={{ background: "none", border: "none", color: "#4b5e2e", fontWeight: 700, fontSize: 20, textAlign: "left", cursor: "pointer" }}>공지사항</button>
+              {isLoggedIn ? (
+                <>
+                  <a href="/products" style={{ background: "#6b8e23", color: "#fff", borderRadius: 8, padding: "12px 0", fontWeight: 800, fontSize: 20, textDecoration: "none", textAlign: "center", marginTop: 12, width: 180 }}>투자하기</a>
+                  <a href="/mypage" style={{ color: "#4b5e2e", fontWeight: 700, fontSize: 20, textDecoration: "none", marginTop: 8 }}>마이페이지</a>
+                </>
+              ) : (
+                <>
+                  <a href="/login" style={{ color: "#4b5e2e", fontWeight: 700, fontSize: 20, textDecoration: "none", marginTop: 8 }}>로그인</a>
+                  <a href="/signup" style={{ color: "#4b5e2e", fontWeight: 700, fontSize: 20, textDecoration: "none", marginTop: 8 }}>회원가입</a>
+                </>
+              )}
+            </nav>
+          </div>
+        )}
       </header>
       {/* 전체 레이아웃 */}
       <div style={{ display: "flex", minHeight: "calc(100vh - 120px)" }}>

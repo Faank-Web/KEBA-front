@@ -75,7 +75,7 @@ export default function HomePage() {
       </header>
 
       {/* 페이지 주요 내용 */}
-      <div style={{ maxWidth: 1100, margin: "0 auto", padding: "0 24px", color: "#111" }}>
+      <div className="main-container" style={{ maxWidth: 1100, margin: "0 auto", padding: "0 24px", color: "#111" }}>
         {/* 홍보영상 및 이벤트 이미지 배너 */}
         <div style={{ background: "#f8f8f8", borderRadius: 12, padding: "60px 40px", marginBottom: 40, position: "relative", display: "flex", alignItems: "center", justifyContent: "center", overflow: "hidden" }}>
           <div style={{ 
@@ -133,7 +133,7 @@ export default function HomePage() {
         </div>
 
         {/* 3개 콘텐츠 블록 */}
-        <div style={{ display: "flex", gap: 24, marginBottom: 60 }}>
+        <div className="main-card-list" style={{ display: "flex", flexWrap: "wrap", gap: 24, marginBottom: 60 }}>
           {/* 왼쪽 블록 - 실제 상품 기반 메시지 */}
           <div style={{ flex: 1, background: "#fff", borderRadius: 12, padding: 32, boxShadow: "0 2px 8px #e0e0e0" }}>
             <div style={{ fontSize: 20, fontWeight: 700, color: "#6b8e23", lineHeight: 1.6 }}>

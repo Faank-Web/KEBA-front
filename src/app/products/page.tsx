@@ -37,9 +37,9 @@ export default function ProductsPage() {
   };
 
   return (
-    <div style={{ maxWidth: 1100, margin: "40px auto", padding: "0 24px", color: "#111", background: "#fff", borderRadius: 16, boxShadow: "0 2px 12px #e0e0e0" }}>
+    <div className="main-container" style={{ maxWidth: 1100, margin: "40px auto", padding: "0 24px", color: "#111", background: "#fff", borderRadius: 16, boxShadow: "0 2px 12px #e0e0e0" }}>
       {/* 카테고리 타이틀 및 정렬 옵션 */}
-      <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", margin: "32px 0 16px 0" }}>
+      <div style={{ display: "flex", flexWrap: "wrap", alignItems: "center", justifyContent: "space-between", margin: "32px 0 16px 0" }}>
         <div style={{ display: "flex", alignItems: "center", gap: 10, fontSize: 22, fontWeight: 700, color: "#111" }}>
           <span style={{ color: "#6b8e23", fontSize: 28 }}>✔</span>
           농수산물 투자 상품
@@ -67,7 +67,7 @@ export default function ProductsPage() {
       </div>
       
       {/* 상품 카드 리스트 (피그마 스타일) */}
-      <div style={{ display: "flex", gap: 24, marginBottom: 24 }}>
+      <div className="product-card-list" style={{ display: "flex", flexWrap: "wrap", gap: 24, marginBottom: 24 }}>
         {/* 첫번째 카드 - 강조 */}
         <Link href="/products/detail" style={{ flex: 1, textDecoration: "none" }}>
           <div style={{ background: "#e6f4d7", borderRadius: 16, boxShadow: "0 2px 8px #b2c7a7", padding: 32, display: "flex", flexDirection: "column", gap: 16, minWidth: 260, position: "relative", cursor: "pointer" }}>
