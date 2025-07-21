@@ -29,6 +29,7 @@ export default function HomePage() {
   const [currentBanner, setCurrentBanner] = useState(0);
   const [currentAuction, setCurrentAuction] = useState(0);
   const [showScrollTop, setShowScrollTop] = useState(false);
+  const [showMobileMenu, setShowMobileMenu] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -59,19 +60,41 @@ export default function HomePage() {
   return (
     <>
       {/* 상단 메뉴 */}
-      <header style={{ height: 80, background: "#fff", borderBottom: "2px solid #b2c7a7", display: "flex", alignItems: "center", padding: "0 40px", fontWeight: 700, fontSize: 20, color: "#111", justifyContent: "space-between" }}>
+      <header className="main-header" style={{ height: 80, background: "#fff", borderBottom: "2px solid #b2c7a7", display: "flex", alignItems: "center", padding: "0 40px", fontWeight: 700, fontSize: 20, color: "#111", justifyContent: "space-between", position: "relative", zIndex: 100 }}>
         <div style={{ display: "flex", alignItems: "center", gap: 32 }}>
           <Image src="/logo.png" alt="FAANK 로고" width={120} height={120} priority />
+        </div>
+        {/* 데스크탑 메뉴 */}
+        <nav className="desktop-nav" style={{ display: "flex", alignItems: "center", gap: 32 }}>
           <button onClick={() => scrollToSection("about-section")} style={{ background: "none", border: "none", fontSize: 16, color: "#666", cursor: "pointer", fontWeight: 500 }}>서비스소개</button>
           <button onClick={() => scrollToSection("magazine-section")} style={{ background: "none", border: "none", fontSize: 16, color: "#666", cursor: "pointer", fontWeight: 500 }}>매거진</button>
           <button onClick={() => scrollToSection("notice-section")} style={{ background: "none", border: "none", fontSize: 16, color: "#666", cursor: "pointer", fontWeight: 500 }}>공지사항</button>
-        </div>
-        <div style={{ display: "flex", alignItems: "center", gap: 20 }}>
           <a href="/products" style={{ background: "#6b8e23", color: "#fff", borderRadius: 6, padding: "8px 18px", fontWeight: 700, fontSize: 16, textDecoration: "none" }}>투자하기</a>
           <a href="/login" style={{ color: "#666", fontWeight: 500, fontSize: 16, textDecoration: "none" }}>로그인</a>
           <span style={{ color: "#666", fontSize: 16 }}>/</span>
           <a href="/signup" style={{ color: "#666", fontWeight: 500, fontSize: 16, textDecoration: "none" }}>회원가입</a>
-        </div>
+        </nav>
+        {/* 모바일 메뉴 버튼 */}
+        <button className="mobile-menu-btn" style={{ display: "none", background: "none", border: "none", fontSize: 32, color: "#6b8e23", cursor: "pointer" }} onClick={() => setShowMobileMenu(true)} aria-label="모바일 메뉴 열기">
+          ☰
+        </button>
+        {/* 모바일 메뉴 오버레이 */}
+        {showMobileMenu && (
+          <div className="mobile-menu-overlay" style={{ position: "fixed", top: 0, left: 0, width: "100vw", height: "100vh", background: "rgba(0,0,0,0.4)", zIndex: 9999, display: "flex", flexDirection: "column" }}>
+            <div style={{ background: "#fff", padding: 24, borderBottom: "2px solid #b2c7a7", display: "flex", alignItems: "center", justifyContent: "space-between" }}>
+              <Image src="/logo.png" alt="FAANK 로고" width={90} height={90} priority />
+              <button onClick={() => setShowMobileMenu(false)} style={{ background: "none", border: "none", fontSize: 32, color: "#6b8e23", cursor: "pointer" }} aria-label="모바일 메뉴 닫기">×</button>
+            </div>
+            <nav style={{ display: "flex", flexDirection: "column", gap: 24, padding: 32, background: "#fff", flex: 1 }}>
+              <button onClick={() => { setShowMobileMenu(false); scrollToSection("about-section"); }} style={{ background: "none", border: "none", fontSize: 18, color: "#666", cursor: "pointer", fontWeight: 500, textAlign: "left" }}>서비스소개</button>
+              <button onClick={() => { setShowMobileMenu(false); scrollToSection("magazine-section"); }} style={{ background: "none", border: "none", fontSize: 18, color: "#666", cursor: "pointer", fontWeight: 500, textAlign: "left" }}>매거진</button>
+              <button onClick={() => { setShowMobileMenu(false); scrollToSection("notice-section"); }} style={{ background: "none", border: "none", fontSize: 18, color: "#666", cursor: "pointer", fontWeight: 500, textAlign: "left" }}>공지사항</button>
+              <a href="/products" style={{ background: "#6b8e23", color: "#fff", borderRadius: 6, padding: "12px 0", fontWeight: 700, fontSize: 18, textDecoration: "none", textAlign: "center" }}>투자하기</a>
+              <a href="/login" style={{ color: "#666", fontWeight: 500, fontSize: 18, textDecoration: "none", textAlign: "center" }}>로그인</a>
+              <a href="/signup" style={{ color: "#666", fontWeight: 500, fontSize: 18, textDecoration: "none", textAlign: "center" }}>회원가입</a>
+            </nav>
+          </div>
+        )}
       </header>
 
       {/* 페이지 주요 내용 */}

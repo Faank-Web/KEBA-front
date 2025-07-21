@@ -127,3 +127,52 @@ body {
     font-size: 13px !important;
   }
 }
+
+/* 메인페이지 헤더 반응형 */
+@media (max-width: 1024px) {
+  .main-header {
+    height: 60px !important;
+    padding: 0 10px !important;
+    font-size: 16px !important;
+  }
+  .main-header img {
+    width: 70px !important;
+    height: 70px !important;
+  }
+  .desktop-nav {
+    display: none !important;
+  }
+  .mobile-menu-btn {
+    display: block !important;
+  }
+}
+@media (max-width: 768px) {
+  .main-header {
+    height: 48px !important;
+    padding: 0 4vw !important;
+    font-size: 14px !important;
+  }
+  .main-header img {
+    width: 48px !important;
+    height: 48px !important;
+  }
+  .mobile-menu-overlay nav {
+    padding: 18px !important;
+    gap: 14px !important;
+  }
+}
+@media (max-width: 480px) {
+  .main-header {
+    height: 40px !important;
+    padding: 0 2vw !important;
+    font-size: 12px !important;
+  }
+  .main-header img {
+    width: 36px !important;
+    height: 36px !important;
+  }
+  .mobile-menu-overlay nav {
+    padding: 8px !important;
+    gap: 8px !important;
+  }
+}

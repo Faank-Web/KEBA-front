@@ -77,7 +77,7 @@ export default function ClientLayout({ children }: { children: React.ReactNode }
         </button>
         {/* 모바일 오버레이 메뉴 */}
         {menuOpen && (
-          <div style={{ position: "fixed", top: 0, left: 0, width: "100vw", height: "100vh", background: "rgba(0,0,0,0.35)", zIndex: 2000, display: "flex", flexDirection: "column" }} onClick={closeMenu}>
+          <div style={{ position: "fixed", top: 0, left: 0, width: "100vw", height: "100vh", background: "#fff", zIndex: 2000, display: "flex", flexDirection: "column" }} onClick={closeMenu}>
             <div style={{ background: "#fff", borderBottom: "2px solid #b2c7a7", padding: "24px 0 16px 32px", display: "flex", alignItems: "center", justifyContent: "space-between" }}>
               <Image src="/logo.png" alt="FAANK 로고" width={90} height={90} priority />
               <button onClick={closeMenu} style={{ background: "none", border: "none", fontSize: 32, color: "#b2c7a7", cursor: "pointer", marginRight: 24 }} aria-label="메뉴 닫기">×</button>
