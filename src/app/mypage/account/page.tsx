@@ -27,6 +27,12 @@ export default function MyAccountPage() {
     setSelectedAccount(null);
   };
 
+  // 출금요청 처리 함수
+  const handleWithdraw = () => {
+    alert('출금요청이 접수되었습니다.');
+    closeModal();
+  };
+
   return (
     <div style={{ width: "100%", background: "#f7f9fa", borderRadius: 24, boxShadow: "0 4px 32px #e0e6ed", padding: "36px 24px 48px 24px", minHeight: 600 }}>
       <div style={{ fontSize: 26, fontWeight: 800, color: "#222", marginBottom: 32, letterSpacing: 1 }}>내 계좌</div>
@@ -185,20 +191,24 @@ export default function MyAccountPage() {
             </div>
 
             {/* 출금요청 버튼 */}
-            <button style={{
-              width: "100%",
-              background: "linear-gradient(90deg, #b2c7a7 0%, #6b8e23 100%)",
-              color: "#fff",
-              border: "none",
-              borderRadius: 12,
-              padding: "18px 0",
-              fontSize: 18,
-              fontWeight: 700,
-              cursor: "pointer",
-              boxShadow: "0 2px 8px #b2c7a7",
-              transition: "background 0.2s"
-            }} onMouseEnter={(e) => e.currentTarget.style.background = "linear-gradient(90deg, #6b8e23 0%, #b2c7a7 100%)"}
-               onMouseLeave={(e) => e.currentTarget.style.background = "linear-gradient(90deg, #b2c7a7 0%, #6b8e23 100%)"}>
+            <button
+              style={{
+                width: "100%",
+                background: "linear-gradient(90deg, #b2c7a7 0%, #6b8e23 100%)",
+                color: "#fff",
+                border: "none",
+                borderRadius: 12,
+                padding: "18px 0",
+                fontSize: 18,
+                fontWeight: 700,
+                cursor: "pointer",
+                boxShadow: "0 2px 8px #b2c7a7",
+                transition: "background 0.2s"
+              }}
+              onClick={handleWithdraw}
+              onMouseEnter={(e) => e.currentTarget.style.background = "linear-gradient(90deg, #6b8e23 0%, #b2c7a7 100%)"}
+              onMouseLeave={(e) => e.currentTarget.style.background = "linear-gradient(90deg, #b2c7a7 0%, #6b8e23 100%)"}
+            >
               출금요청
             </button>
           </div>
