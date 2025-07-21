@@ -360,13 +360,13 @@ export default function HomePage() {
       )}
 
       {/* 피그마 스타일 푸터 */}
-      <footer style={{ background: "#ededed", borderTop: "1px solid #e0e0e0", padding: "40px 0 0 0", marginTop: 40, color: "#111" }}>
+      <footer style={{ background: "linear-gradient(90deg, #e6f4d7 0%, #b2c7a7 100%)", borderTop: "none", borderRadius: "0 0 32px 32px", boxShadow: "0 -4px 24px #b2c7a7", padding: "56px 0 0 0", marginTop: 56, color: "#222" }}>
         <div style={{ maxWidth: 1100, margin: "0 auto", padding: "0 32px" }}>
-          <div style={{ display: "flex", justifyContent: "space-between", gap: 32, flexWrap: "wrap", color: "#111" }}>
+          <div style={{ display: "flex", justifyContent: "space-between", gap: 48, flexWrap: "wrap", color: "#222" }}>
             {/* 서비스 */}
             <div>
-              <div style={{ fontWeight: 700, fontSize: 18, marginBottom: 16, color: "#111" }}>서비스</div>
-              <div style={{ color: "#111", lineHeight: 2 }}>
+              <div style={{ fontWeight: 900, fontSize: 20, marginBottom: 18, color: "#4b5e2e", letterSpacing: 0.5 }}>서비스</div>
+              <div style={{ color: "#222", lineHeight: 2, fontWeight: 500 }}>
                 <div>투자하기</div>
                 <div>서비스 소개</div>
                 <div>매거진</div>
@@ -378,8 +378,8 @@ export default function HomePage() {
             </div>
             {/* 문의 */}
             <div>
-              <div style={{ fontWeight: 700, fontSize: 18, marginBottom: 16, color: "#111" }}>문의</div>
-              <div style={{ color: "#111", lineHeight: 2 }}>
+              <div style={{ fontWeight: 900, fontSize: 20, marginBottom: 18, color: "#4b5e2e", letterSpacing: 0.5 }}>문의</div>
+              <div style={{ color: "#222", lineHeight: 2, fontWeight: 500 }}>
                 <div>사업제휴 문의</div>
                 <div>농장입점 문의</div>
                 <div>기관투자 문의</div>
@@ -387,8 +387,8 @@ export default function HomePage() {
             </div>
             {/* 약관 */}
             <div>
-              <div style={{ fontWeight: 700, fontSize: 18, marginBottom: 16, color: "#111" }}>약관</div>
-              <div style={{ color: "#111", lineHeight: 2 }}>
+              <div style={{ fontWeight: 900, fontSize: 20, marginBottom: 18, color: "#4b5e2e", letterSpacing: 0.5 }}>약관</div>
+              <div style={{ color: "#222", lineHeight: 2, fontWeight: 500 }}>
                 <div>서비스 이용약관</div>
                 <div>추심이체 거래약관</div>
                 <div>개인정보 처리방침</div>
@@ -397,8 +397,8 @@ export default function HomePage() {
             </div>
           </div>
           {/* 하단 회사 정보 */}
-          <div style={{ borderTop: "1px solid #ccc", marginTop: 32, padding: "24px 0 12px 0", color: "#111", fontSize: 14, lineHeight: 1.7 }}>
-            <div style={{ display: "flex", flexWrap: "wrap", gap: 32, justifyContent: "space-between" }}>
+          <div style={{ borderTop: "1.5px solid #b2c7a7", marginTop: 40, padding: "28px 0 16px 0", color: "#4b5e2e", fontSize: 15, lineHeight: 1.8, fontWeight: 500 }}>
+            <div style={{ display: "flex", flexWrap: "wrap", gap: 40, justifyContent: "space-between" }}>
               <div>
                 (주)한국엑스퍼트브랜드협회 | 대표: 최윤희<br />
                 주소: 경기도 하남시 미사강변한강로 279 129, 130호<br />

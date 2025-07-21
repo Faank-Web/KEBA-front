@@ -28,20 +28,19 @@ export default function MyAccountPage() {
   };
 
   return (
-    <div style={{ width: "100%" }}>
-      <div style={{ fontSize: 22, fontWeight: 700, color: "#111", marginBottom: 18 }}>내 계좌</div>
-      
+    <div style={{ width: "100%", background: "#f7f9fa", borderRadius: 24, boxShadow: "0 4px 32px #e0e6ed", padding: "36px 24px 48px 24px", minHeight: 600 }}>
+      <div style={{ fontSize: 26, fontWeight: 800, color: "#222", marginBottom: 32, letterSpacing: 1 }}>내 계좌</div>
       {/* 계좌 목록 */}
-      <div style={{ display: "flex", flexDirection: "column", gap: 16 }}>
+      <div style={{ display: "flex", flexDirection: "column", gap: 20 }}>
         {accounts.map((account) => (
           <div
             key={account.id}
             onClick={() => handleAccountClick(account.name)}
             style={{
-              background: "#fff",
-              borderRadius: 12,
-              boxShadow: "0 2px 8px #e0e0e0",
-              padding: 24,
+              background: "linear-gradient(135deg, #e6f4d7 0%, #b2c7a7 100%)",
+              borderRadius: 18,
+              boxShadow: "0 2px 12px #e0e0e0",
+              padding: 32,
               display: "flex",
               alignItems: "center",
               justifyContent: "space-between",
@@ -50,31 +49,32 @@ export default function MyAccountPage() {
             }}
             onMouseEnter={(e) => {
               e.currentTarget.style.transform = "translateY(-2px)";
-              e.currentTarget.style.boxShadow = "0 4px 12px #d0d0d0";
+              e.currentTarget.style.boxShadow = "0 4px 16px #b2c7a7";
             }}
             onMouseLeave={(e) => {
               e.currentTarget.style.transform = "translateY(0)";
-              e.currentTarget.style.boxShadow = "0 2px 8px #e0e0e0";
+              e.currentTarget.style.boxShadow = "0 2px 12px #e0e0e0";
             }}
           >
-            <div style={{ display: "flex", alignItems: "center", gap: 16 }}>
+            <div style={{ display: "flex", alignItems: "center", gap: 18 }}>
               <div style={{
-                width: 48,
-                height: 48,
+                width: 54,
+                height: 54,
                 borderRadius: "50%",
-                background: "#4a90e2",
+                background: "#fff",
                 display: "flex",
                 alignItems: "center",
                 justifyContent: "center",
-                color: "#fff",
+                color: "#b2c7a7",
                 fontWeight: 700,
-                fontSize: 18
+                fontSize: 22,
+                boxShadow: "0 2px 8px #e0e0e0"
               }}>
                 {account.icon}
               </div>
-              <span style={{ fontSize: 18, fontWeight: 600, color: "#111" }}>{account.name}</span>
+              <span style={{ fontSize: 20, fontWeight: 700, color: "#222" }}>{account.name}</span>
             </div>
-            <div style={{ fontSize: 20, color: "#ccc" }}>&gt;</div>
+            <div style={{ fontSize: 28, color: "#b2c7a7" }}>&gt;</div>
           </div>
         ))}
       </div>
@@ -95,42 +95,47 @@ export default function MyAccountPage() {
         }} onClick={closeModal}>
           <div style={{
             background: "#fff",
-            borderRadius: 16,
-            padding: 32,
+            borderRadius: 22,
+            padding: 40,
             width: "90%",
-            maxWidth: 500,
+            maxWidth: 520,
             maxHeight: "80vh",
-            overflow: "auto"
+            overflow: "auto",
+            boxShadow: "0 8px 32px #b2c7a7"
           }} onClick={(e) => e.stopPropagation()}>
-            
             {/* 모달 헤더 */}
-            <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: 24 }}>
-              <div style={{ display: "flex", alignItems: "center", gap: 16 }}>
+            <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: 28 }}>
+              <div style={{ display: "flex", alignItems: "center", gap: 18 }}>
                 <div style={{
-                  width: 48,
-                  height: 48,
+                  width: 54,
+                  height: 54,
                   borderRadius: "50%",
-                  background: "#4a90e2",
+                  background: "#e6f4d7",
                   display: "flex",
                   alignItems: "center",
                   justifyContent: "center",
-                  color: "#fff",
+                  color: "#b2c7a7",
                   fontWeight: 700,
-                  fontSize: 18
+                  fontSize: 22,
+                  boxShadow: "0 2px 8px #e0e0e0"
                 }}>
                   {selectedAccount === "신한투자증권" ? "S" : "N"}
                 </div>
-                <span style={{ fontSize: 20, fontWeight: 700, color: "#111" }}>{selectedAccount}</span>
+                <span style={{ fontSize: 24, fontWeight: 800, color: "#222" }}>{selectedAccount}</span>
               </div>
               <button
                 onClick={closeModal}
                 style={{
-                  background: "none",
+                  background: "#f7f9fa",
                   border: "none",
-                  fontSize: 24,
-                  color: "#ccc",
+                  borderRadius: "50%",
+                  fontSize: 26,
+                  color: "#b2c7a7",
                   cursor: "pointer",
-                  padding: 4
+                  padding: 6,
+                  width: 40,
+                  height: 40,
+                  boxShadow: "0 1px 4px #e0e0e0"
                 }}
               >
                 ×
@@ -138,38 +143,38 @@ export default function MyAccountPage() {
             </div>
 
             {/* 투자 상품 목록 */}
-            <div style={{ marginBottom: 32 }}>
-              <div style={{ fontSize: 18, fontWeight: 600, color: "#111", marginBottom: 16 }}>투자 상품</div>
-              <div style={{ display: "flex", flexDirection: "column", gap: 16 }}>
+            <div style={{ marginBottom: 36 }}>
+              <div style={{ fontSize: 20, fontWeight: 800, color: "#222", marginBottom: 18 }}>투자 상품</div>
+              <div style={{ display: "flex", flexDirection: "column", gap: 18 }}>
                 {products.map((product, index) => (
                   <div key={index} style={{
                     display: "flex",
                     alignItems: "center",
-                    gap: 16,
-                    padding: 16,
+                    gap: 18,
+                    padding: 18,
                     background: "#f8f8f8",
-                    borderRadius: 8
+                    borderRadius: 12
                   }}>
                     <div style={{
-                      width: 60,
-                      height: 60,
-                      background: "#ddd",
-                      borderRadius: 8,
+                      width: 64,
+                      height: 64,
+                      background: "#e6f4d7",
+                      borderRadius: 12,
                       display: "flex",
                       alignItems: "center",
                       justifyContent: "center",
-                      fontSize: 12,
-                      color: "#666"
+                      fontSize: 13,
+                      color: "#b2c7a7"
                     }}>
                       상품 이미지
                     </div>
                     <div style={{ flex: 1 }}>
-                      <div style={{ fontSize: 16, fontWeight: 600, color: "#111", marginBottom: 4 }}>{product.name}</div>
-                      <div style={{ fontSize: 14, color: "#666" }}>{product.amount}</div>
+                      <div style={{ fontSize: 17, fontWeight: 700, color: "#222", marginBottom: 4 }}>{product.name}</div>
+                      <div style={{ fontSize: 15, color: "#666" }}>{product.amount}</div>
                     </div>
                     <div style={{
-                      fontSize: 16,
-                      fontWeight: 700,
+                      fontSize: 17,
+                      fontWeight: 800,
                       color: product.isPositive ? "#4a90e2" : "#e74c3c"
                     }}>
                       {product.profit}
@@ -182,17 +187,18 @@ export default function MyAccountPage() {
             {/* 출금요청 버튼 */}
             <button style={{
               width: "100%",
-              background: "#6b8e23",
+              background: "linear-gradient(90deg, #b2c7a7 0%, #6b8e23 100%)",
               color: "#fff",
               border: "none",
-              borderRadius: 8,
-              padding: "16px 0",
-              fontSize: 16,
+              borderRadius: 12,
+              padding: "18px 0",
+              fontSize: 18,
               fontWeight: 700,
               cursor: "pointer",
+              boxShadow: "0 2px 8px #b2c7a7",
               transition: "background 0.2s"
-            }} onMouseEnter={(e) => e.currentTarget.style.background = "#5a7a1e"}
-               onMouseLeave={(e) => e.currentTarget.style.background = "#6b8e23"}>
+            }} onMouseEnter={(e) => e.currentTarget.style.background = "linear-gradient(90deg, #6b8e23 0%, #b2c7a7 100%)"}
+               onMouseLeave={(e) => e.currentTarget.style.background = "linear-gradient(90deg, #b2c7a7 0%, #6b8e23 100%)"}>
               출금요청
             </button>
           </div>
