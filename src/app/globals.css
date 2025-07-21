@@ -176,3 +176,20 @@ body {
     gap: 8px !important;
   }
 }
+
+@media (max-width: 1024px) {
+  .main-nav-left, .main-nav-right, .desktop-nav {
+    display: none !important;
+  }
+  .mobile-menu-btn {
+    display: block !important;
+  }
+}
+@media (min-width: 1025px) {
+  .main-nav-left, .main-nav-right, .desktop-nav {
+    display: flex !important;
+  }
+  .mobile-menu-btn {
+    display: none !important;
+  }
+}
