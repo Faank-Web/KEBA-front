@@ -30,6 +30,7 @@ export default function ClientLayout({ children }: { children: React.ReactNode }
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
   const [showShorts, setShowShorts] = useState(true);
+  const [isFullscreen, setIsFullscreen] = useState(false);
 
   useEffect(() => {
     const loginStatus = localStorage.getItem("isLoggedIn");
@@ -208,23 +209,94 @@ export default function ClientLayout({ children }: { children: React.ReactNode }
       {/* 메인페이지면 children만 */}
       {isMain && <main>{children}</main>}
       {/* 오른쪽 아래 고정 유튜브 숏츠 */}
-      {showShorts && pathname === "/" && (
-        <div style={{
-          position: "fixed",
-          bottom: 24,
-          right: 24,
-          width: 240,
-          height: 430, // Shorts 세로 비율에 맞게 높이 조정
-          zIndex: 9999,
-          borderRadius: 16,
-          overflow: "hidden",
-          boxShadow: "0 4px 16px rgba(0,0,0,0.18)",
-          background: "#000"
-        }}>
-          {/* 닫기 버튼 */}
-          <button
-            onClick={() => setShowShorts(false)}
-            style={{
+      {showShorts && !isMypage && (
+        isFullscreen ? (
+          // 전체화면 모달
+          <div style={{
+            position: "fixed",
+            top: 0,
+            left: 0,
+            width: "100vw",
+            height: "100vh",
+            background: "rgba(0,0,0,0.9)",
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+            zIndex: 99999,
+            overflow: "hidden"
+          }}>
+            {/* 전체화면 버튼들: 영상 위쪽 중앙 */}
+            <div style={{
+              position: "absolute",
+              top: "calc(5% - 32px)",
+              left: "50%",
+              transform: "translateX(-50%)",
+              display: "flex",
+              gap: 16,
+              zIndex: 100000
+            }}>
+              <button onClick={() => setIsFullscreen(false)} style={{
+                background: "rgba(0,0,0,0.5)",
+                border: "none",
+                color: "#fff",
+                borderRadius: "50%",
+                width: 40,
+                height: 40,
+                fontSize: 24,
+                cursor: "pointer"
+              }} aria-label="화면축소">⛶</button>
+              <button onClick={() => setShowShorts(false)} style={{
+                background: "rgba(0,0,0,0.5)",
+                border: "none",
+                color: "#fff",
+                borderRadius: "50%",
+                width: 40,
+                height: 40,
+                fontSize: 24,
+                cursor: "pointer"
+              }} aria-label="닫기">X</button>
+            </div>
+            <iframe
+              width="90%"
+              height="90%"
+              src="https://www.youtube.com/embed/BfKI_TQnQvo?autoplay=1&mute=1&controls=1&loop=1&playlist=BfKI_TQnQvo"
+              title="YouTube Shorts"
+              frameBorder="0"
+              allow="autoplay; encrypted-media"
+              allowFullScreen
+              style={{ border: "none" }}
+            />
+          </div>
+        ) : (
+          // 오른쪽 아래 작은 창
+          <div style={{
+            position: "fixed",
+            bottom: 24,
+            right: 24,
+            width: 240,
+            height: 430, // Shorts 세로 비율에 맞게 높이 조정
+            zIndex: 9999,
+            borderRadius: 16,
+            overflow: "hidden",
+            boxShadow: "0 4px 16px rgba(0,0,0,0.18)",
+            background: "#000"
+          }}>
+            {/* 작은 창 버튼: 크게보기 왼쪽 위, 닫기 오른쪽 위 */}
+            <button onClick={() => setIsFullscreen(true)} style={{
+              position: "absolute",
+              top: 8,
+              left: 8,
+              background: "rgba(0,0,0,0.5)",
+              color: "#fff",
+              border: "none",
+              borderRadius: "50%",
+              width: 32,
+              height: 32,
+              fontSize: 20,
+              cursor: "pointer",
+              zIndex: 10000
+            }} aria-label="크게 보기">⛶</button>
+            <button onClick={() => setShowShorts(false)} style={{
               position: "absolute",
               top: 8,
               right: 8,
@@ -237,22 +309,19 @@ export default function ClientLayout({ children }: { children: React.ReactNode }
               fontSize: 20,
               cursor: "pointer",
               zIndex: 10000
-            }}
-            aria-label="닫기"
-          >
-            ×
-          </button>
-          <iframe
-            width="100%"
-            height="100%"
-            src="https://www.youtube.com/embed/BfKI_TQnQvo?autoplay=1&mute=1&controls=1&loop=1&playlist=BfKI_TQnQvo"
-            title="YouTube Shorts"
-            frameBorder="0"
-            allow="autoplay; encrypted-media"
-            allowFullScreen
-            style={{ border: "none" }}
-          />
-        </div>
+            }} aria-label="닫기">X</button>
+            <iframe
+              width="100%"
+              height="100%"
+              src="https://www.youtube.com/embed/BfKI_TQnQvo?autoplay=1&mute=1&controls=1&loop=1&playlist=BfKI_TQnQvo"
+              title="YouTube Shorts"
+              frameBorder="0"
+              allow="autoplay; encrypted-media"
+              allowFullScreen
+              style={{ border: "none" }}
+            />
+          </div>
+        )
       )}
     </>
   );
