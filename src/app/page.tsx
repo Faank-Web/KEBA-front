@@ -361,8 +361,7 @@ export default function HomePage() {
           style={{
             position: "fixed",
             right: 24,
-            top: "50%",
-            transform: "translateY(-50%)",
+            top: 100,
             width: 44,
             height: 44,
             borderRadius: "50%",
