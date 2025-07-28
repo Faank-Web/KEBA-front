@@ -36,11 +36,19 @@ export default function ClientLayout({ children }: { children: React.ReactNode }
     { type: 'bot', message: '안녕하세요! FAANK AI 챗봇입니다. 무엇을 도와드릴까요?', timestamp: new Date() }
   ]);
   const [inputMessage, setInputMessage] = useState("");
+  const [chatScrollRef, setChatScrollRef] = useState<HTMLDivElement | null>(null);
 
   useEffect(() => {
     const loginStatus = localStorage.getItem("isLoggedIn");
     setIsLoggedIn(loginStatus === "true");
   }, []);
+
+  // 메시지가 추가될 때마다 스크롤을 맨 아래로 이동
+  useEffect(() => {
+    if (chatScrollRef) {
+      chatScrollRef.scrollTop = chatScrollRef.scrollHeight;
+    }
+  }, [chatMessages, chatScrollRef]);
 
   // 모바일 메뉴 닫기
   const closeMenu = () => setMenuOpen(false);
@@ -71,11 +79,11 @@ export default function ClientLayout({ children }: { children: React.ReactNode }
         const newMessages = prev.filter(msg => msg.message !== '...');
         return [...newMessages, {
           type: 'bot',
-          message: '죄송합니다. 현재 AI 챗봇 서비스가 준비 중입니다. 곧 만나보실 수 있습니다!',
+          message: `"${userMessage.message}"에 대한 답변을 준비 중입니다. AI 서비스가 연결되면 더 정확한 답변을 받으실 수 있습니다!`,
           timestamp: new Date()
         }];
       });
-    }, 1000);
+    }, 1500);
   };
 
   // Enter 키로 메시지 전송
@@ -456,12 +464,15 @@ export default function ClientLayout({ children }: { children: React.ReactNode }
               </div>
 
               {/* 메시지 영역 */}
-              <div style={{
-                flex: 1,
-                padding: "20px",
-                overflowY: "auto",
-                background: "#f8f9fa"
-              }}>
+              <div 
+                ref={setChatScrollRef}
+                style={{
+                  flex: 1,
+                  padding: "20px",
+                  overflowY: "auto",
+                  background: "#f8f9fa"
+                }}
+              >
                 {chatMessages.map((msg, index) => (
                   <div key={index} style={{
                     marginBottom: 16,
@@ -502,7 +513,7 @@ export default function ClientLayout({ children }: { children: React.ReactNode }
                     value={inputMessage}
                     onChange={(e) => setInputMessage(e.target.value)}
                     onKeyPress={handleKeyPress}
-                    placeholder="메시지를 입력하세요..."
+                    placeholder="투자 관련 질문을 자유롭게 해주세요..."
                     style={{
                       width: "100%",
                       minHeight: 40,
@@ -513,7 +524,16 @@ export default function ClientLayout({ children }: { children: React.ReactNode }
                       fontSize: 14,
                       resize: "none",
                       outline: "none",
-                      fontFamily: "inherit"
+                      fontFamily: "inherit",
+                      transition: "border-color 0.3s ease",
+                      color: "#333",
+                      fontWeight: 500
+                    }}
+                    onFocus={(e) => {
+                      e.target.style.borderColor = "#6b8e23";
+                    }}
+                    onBlur={(e) => {
+                      e.target.style.borderColor = "#e0e0e0";
                     }}
                   />
                 </div>
@@ -532,7 +552,20 @@ export default function ClientLayout({ children }: { children: React.ReactNode }
                     alignItems: "center",
                     justifyContent: "center",
                     fontSize: 16,
-                    transition: "all 0.3s ease"
+                    transition: "all 0.3s ease",
+                    transform: inputMessage.trim() ? "scale(1)" : "scale(0.9)"
+                  }}
+                  onMouseEnter={(e) => {
+                    if (inputMessage.trim()) {
+                      e.currentTarget.style.transform = "scale(1.1)";
+                      e.currentTarget.style.background = "#4b5e2e";
+                    }
+                  }}
+                  onMouseLeave={(e) => {
+                    if (inputMessage.trim()) {
+                      e.currentTarget.style.transform = "scale(1)";
+                      e.currentTarget.style.background = "#6b8e23";
+                    }
                   }}
                 >
                   ➤
