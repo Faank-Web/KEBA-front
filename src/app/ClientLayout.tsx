@@ -56,6 +56,7 @@ export default function ClientLayout({ children }: { children: React.ReactNode }
                 <button onClick={() => goToMainAndScroll('about-section', isMain)} style={{ background: "none", border: "none", fontSize: 16, color: "#666", cursor: "pointer", fontWeight: 500 }}>서비스소개</button>
                 <button onClick={() => goToMainAndScroll('magazine-section', isMain)} style={{ background: "none", border: "none", fontSize: 16, color: "#666", cursor: "pointer", fontWeight: 500 }}>매거진</button>
                 <button onClick={() => goToMainAndScroll('notice-section', isMain)} style={{ background: "none", border: "none", fontSize: 16, color: "#666", cursor: "pointer", fontWeight: 500 }}>공지사항</button>
+                <a href="/recommendation" style={{ background: "none", border: "none", fontSize: 16, color: "#666", cursor: "pointer", fontWeight: 500, textDecoration: "none" }}>추천시스템</a>
               </nav>
             </div>
             {/* 오른쪽 메뉴 */}
@@ -89,6 +90,7 @@ export default function ClientLayout({ children }: { children: React.ReactNode }
                   <button onClick={() => { goToMainAndScroll('about-section', isMain); closeMenu(); }} style={{ background: "none", border: "none", color: "#4b5e2e", fontWeight: 700, fontSize: 20, textAlign: "left", cursor: "pointer" }}>서비스소개</button>
                   <button onClick={() => { goToMainAndScroll('magazine-section', isMain); closeMenu(); }} style={{ background: "none", border: "none", color: "#4b5e2e", fontWeight: 700, fontSize: 20, textAlign: "left", cursor: "pointer" }}>매거진</button>
                   <button onClick={() => { goToMainAndScroll('notice-section', isMain); closeMenu(); }} style={{ background: "none", border: "none", color: "#4b5e2e", fontWeight: 700, fontSize: 20, textAlign: "left", cursor: "pointer" }}>공지사항</button>
+                  <a href="/recommendation" style={{ background: "none", border: "none", color: "#4b5e2e", fontWeight: 700, fontSize: 20, textAlign: "left", cursor: "pointer", textDecoration: "none" }}>추천시스템</a>
                   {isLoggedIn ? (
                     <>
                       <a href="/products" style={{ background: "#6b8e23", color: "#fff", borderRadius: 8, padding: "12px 0", fontWeight: 800, fontSize: 20, textDecoration: "none", textAlign: "center", marginTop: 12, width: 180 }}>투자하기</a>

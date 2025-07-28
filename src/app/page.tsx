@@ -67,6 +67,7 @@ export default function HomePage() {
             <button onClick={() => scrollToSection("about-section")} style={{ background: "none", border: "none", fontSize: 16, color: "#666", cursor: "pointer", fontWeight: 500 }}>서비스소개</button>
             <button onClick={() => scrollToSection("magazine-section")} style={{ background: "none", border: "none", fontSize: 16, color: "#666", cursor: "pointer", fontWeight: 500 }}>매거진</button>
             <button onClick={() => scrollToSection("notice-section")} style={{ background: "none", border: "none", fontSize: 16, color: "#666", cursor: "pointer", fontWeight: 500 }}>공지사항</button>
+            <a href="/recommendation" style={{ background: "none", border: "none", fontSize: 16, color: "#666", cursor: "pointer", fontWeight: 500, textDecoration: "none" }}>추천시스템</a>
           </nav>
         </div>
         {/* 오른쪽 메뉴 */}
@@ -91,6 +92,7 @@ export default function HomePage() {
               <button onClick={() => { setShowMobileMenu(false); scrollToSection("about-section"); }} style={{ background: "none", border: "none", fontSize: 18, color: "#666", cursor: "pointer", fontWeight: 500, textAlign: "left" }}>서비스소개</button>
               <button onClick={() => { setShowMobileMenu(false); scrollToSection("magazine-section"); }} style={{ background: "none", border: "none", fontSize: 18, color: "#666", cursor: "pointer", fontWeight: 500, textAlign: "left" }}>매거진</button>
               <button onClick={() => { setShowMobileMenu(false); scrollToSection("notice-section"); }} style={{ background: "none", border: "none", fontSize: 18, color: "#666", cursor: "pointer", fontWeight: 500, textAlign: "left" }}>공지사항</button>
+              <a href="/recommendation" style={{ color: "#666", fontWeight: 500, fontSize: 18, textDecoration: "none", textAlign: "center" }}>추천시스템</a>
               <a href="/products" style={{ background: "#6b8e23", color: "#fff", borderRadius: 6, padding: "12px 0", fontWeight: 700, fontSize: 18, textDecoration: "none", textAlign: "center" }}>투자하기</a>
               <a href="/login" style={{ color: "#666", fontWeight: 500, fontSize: 18, textDecoration: "none", textAlign: "center" }}>로그인</a>
               <a href="/signup" style={{ color: "#666", fontWeight: 500, fontSize: 18, textDecoration: "none", textAlign: "center" }}>회원가입</a>
