@@ -31,6 +31,11 @@ export default function ClientLayout({ children }: { children: React.ReactNode }
   const [menuOpen, setMenuOpen] = useState(false);
   const [showShorts, setShowShorts] = useState(true);
   const [isFullscreen, setIsFullscreen] = useState(false);
+  const [showChatbot, setShowChatbot] = useState(false);
+  const [chatMessages, setChatMessages] = useState<Array<{type: 'user' | 'bot', message: string, timestamp: Date}>>([
+    { type: 'bot', message: '안녕하세요! FAANK AI 챗봇입니다. 무엇을 도와드릴까요?', timestamp: new Date() }
+  ]);
+  const [inputMessage, setInputMessage] = useState("");
 
   useEffect(() => {
     const loginStatus = localStorage.getItem("isLoggedIn");
@@ -39,6 +44,47 @@ export default function ClientLayout({ children }: { children: React.ReactNode }
 
   // 모바일 메뉴 닫기
   const closeMenu = () => setMenuOpen(false);
+
+  // 챗봇 메시지 전송
+  const handleSendMessage = async () => {
+    if (!inputMessage.trim()) return;
+
+    const userMessage = { type: 'user' as const, message: inputMessage, timestamp: new Date() };
+    setChatMessages(prev => [...prev, userMessage]);
+    setInputMessage("");
+
+    // 로딩 메시지 추가
+    const loadingMessage = { type: 'bot' as const, message: '...', timestamp: new Date() };
+    setChatMessages(prev => [...prev, loadingMessage]);
+
+    // TODO: FastAPI 백엔드 연결
+    // const response = await fetch('/api/chatbot', {
+    //   method: 'POST',
+    //   headers: { 'Content-Type': 'application/json' },
+    //   body: JSON.stringify({ message: inputMessage })
+    // });
+    // const data = await response.json();
+
+    // 임시 응답 (나중에 백엔드로 교체)
+    setTimeout(() => {
+      setChatMessages(prev => {
+        const newMessages = prev.filter(msg => msg.message !== '...');
+        return [...newMessages, {
+          type: 'bot',
+          message: '죄송합니다. 현재 AI 챗봇 서비스가 준비 중입니다. 곧 만나보실 수 있습니다!',
+          timestamp: new Date()
+        }];
+      });
+    }, 1000);
+  };
+
+  // Enter 키로 메시지 전송
+  const handleKeyPress = (e: React.KeyboardEvent) => {
+    if (e.key === 'Enter' && !e.shiftKey) {
+      e.preventDefault();
+      handleSendMessage();
+    }
+  };
 
   return (
     <>
@@ -324,6 +370,177 @@ export default function ClientLayout({ children }: { children: React.ReactNode }
             />
           </div>
         )
+      )}
+      
+      {/* AI 챗봇 */}
+      {(
+        <>
+          {/* 챗봇 토글 버튼 */}
+          <button
+            onClick={() => setShowChatbot(!showChatbot)}
+            style={{
+              position: "fixed",
+              bottom: 24,
+              left: 24,
+              width: 60,
+              height: 60,
+              borderRadius: "50%",
+              background: "linear-gradient(135deg, #6b8e23 0%, #4b5e2e 100%)",
+              border: "none",
+              boxShadow: "0 4px 16px rgba(107, 142, 35, 0.3)",
+              cursor: "pointer",
+              zIndex: 9998,
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              fontSize: 24,
+              color: "#fff",
+              transition: "all 0.3s ease"
+            }}
+            onMouseEnter={(e) => {
+              e.currentTarget.style.transform = "scale(1.1)";
+              e.currentTarget.style.boxShadow = "0 6px 20px rgba(107, 142, 35, 0.4)";
+            }}
+            onMouseLeave={(e) => {
+              e.currentTarget.style.transform = "scale(1)";
+              e.currentTarget.style.boxShadow = "0 4px 16px rgba(107, 142, 35, 0.3)";
+            }}
+          >
+            {showChatbot ? "×" : "🤖"}
+          </button>
+
+          {/* 챗봇 창 */}
+          {showChatbot && (
+            <div style={{
+              position: "fixed",
+              bottom: 100,
+              left: 24,
+              width: 350,
+              height: 500,
+              background: "#fff",
+              borderRadius: 20,
+              boxShadow: "0 8px 32px rgba(0,0,0,0.15)",
+              zIndex: 9997,
+              display: "flex",
+              flexDirection: "column",
+              overflow: "hidden",
+              border: "2px solid #e6f4d7"
+            }}>
+              {/* 챗봇 헤더 */}
+              <div style={{
+                background: "linear-gradient(135deg, #6b8e23 0%, #4b5e2e 100%)",
+                padding: "16px 20px",
+                color: "#fff",
+                display: "flex",
+                alignItems: "center",
+                gap: 12,
+                borderTopLeftRadius: 18,
+                borderTopRightRadius: 18
+              }}>
+                <div style={{
+                  width: 32,
+                  height: 32,
+                  borderRadius: "50%",
+                  background: "#fff",
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  fontSize: 16
+                }}>
+                  🤖
+                </div>
+                <div>
+                  <div style={{ fontWeight: 700, fontSize: 16 }}>FAANK AI 챗봇</div>
+                  <div style={{ fontSize: 12, opacity: 0.8 }}>실시간 투자 상담</div>
+                </div>
+              </div>
+
+              {/* 메시지 영역 */}
+              <div style={{
+                flex: 1,
+                padding: "20px",
+                overflowY: "auto",
+                background: "#f8f9fa"
+              }}>
+                {chatMessages.map((msg, index) => (
+                  <div key={index} style={{
+                    marginBottom: 16,
+                    display: "flex",
+                    justifyContent: msg.type === 'user' ? 'flex-end' : 'flex-start'
+                  }}>
+                    <div style={{
+                      maxWidth: "80%",
+                      padding: "12px 16px",
+                      borderRadius: msg.type === 'user' ? "18px 18px 4px 18px" : "18px 18px 18px 4px",
+                      background: msg.type === 'user' ? "#6b8e23" : "#fff",
+                      color: msg.type === 'user' ? "#fff" : "#333",
+                      fontSize: 14,
+                      lineHeight: 1.4,
+                      boxShadow: msg.type === 'user' ? "none" : "0 2px 8px rgba(0,0,0,0.1)",
+                      border: msg.type === 'user' ? "none" : "1px solid #e0e0e0"
+                    }}>
+                      {msg.message}
+                    </div>
+                  </div>
+                ))}
+              </div>
+
+              {/* 입력 영역 */}
+              <div style={{
+                padding: "16px 20px",
+                background: "#fff",
+                borderTop: "1px solid #e0e0e0",
+                display: "flex",
+                gap: 12,
+                alignItems: "flex-end"
+              }}>
+                <div style={{
+                  flex: 1,
+                  position: "relative"
+                }}>
+                  <textarea
+                    value={inputMessage}
+                    onChange={(e) => setInputMessage(e.target.value)}
+                    onKeyPress={handleKeyPress}
+                    placeholder="메시지를 입력하세요..."
+                    style={{
+                      width: "100%",
+                      minHeight: 40,
+                      maxHeight: 100,
+                      padding: "10px 12px",
+                      borderRadius: 20,
+                      border: "1px solid #e0e0e0",
+                      fontSize: 14,
+                      resize: "none",
+                      outline: "none",
+                      fontFamily: "inherit"
+                    }}
+                  />
+                </div>
+                <button
+                  onClick={handleSendMessage}
+                  disabled={!inputMessage.trim()}
+                  style={{
+                    width: 40,
+                    height: 40,
+                    borderRadius: "50%",
+                    background: inputMessage.trim() ? "#6b8e23" : "#ccc",
+                    border: "none",
+                    color: "#fff",
+                    cursor: inputMessage.trim() ? "pointer" : "not-allowed",
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                    fontSize: 16,
+                    transition: "all 0.3s ease"
+                  }}
+                >
+                  ➤
+                </button>
+              </div>
+            </div>
+          )}
+        </>
       )}
     </>
   );
